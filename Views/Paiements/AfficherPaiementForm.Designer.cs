@@ -1,6 +1,6 @@
-﻿namespace Pos_Restaurant.Views.Menus
+﻿namespace Pos_Restaurant.Views.Paiements
 {
-    partial class AfficherMenuForm
+    partial class AfficherPaiementForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dgvMenus = new System.Windows.Forms.DataGridView();
+            dgvPaiements = new System.Windows.Forms.DataGridView();
             txtId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            txtNom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            txtType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            txtPrix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            txtQuantite = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            txtDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            txtIdCommande = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            txtMontant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            txtDatePaiement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            txtModePaiement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             btnAjouter = new System.Windows.Forms.Button();
             btnModifier = new System.Windows.Forms.Button();
             btnSupprimer = new System.Windows.Forms.Button();
             txtRechercher = new System.Windows.Forms.TextBox();
             lblRechercher = new System.Windows.Forms.Label();
             lblNombreResultats = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)dgvMenus).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPaiements).BeginInit();
             SuspendLayout();
             // 
-            // dgvMenus
+            // dgvPaiements
             // 
-            dgvMenus.AllowUserToAddRows = false;
-            dgvMenus.ColumnHeadersHeight = 34;
-            dgvMenus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { txtId, txtNom, txtType, txtPrix, txtQuantite, txtDescription });
-            dgvMenus.Location = new System.Drawing.Point(12, 120);
-            dgvMenus.Name = "dgvMenus";
-            dgvMenus.ReadOnly = true;
-            dgvMenus.RowHeadersWidth = 62;
-            dgvMenus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgvMenus.Size = new System.Drawing.Size(943, 328);
-            dgvMenus.TabIndex = 0;
+            dgvPaiements.AllowUserToAddRows = false;
+            dgvPaiements.ColumnHeadersHeight = 34;
+            dgvPaiements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { txtId, txtIdCommande, txtMontant, txtDatePaiement, txtModePaiement });
+            dgvPaiements.Location = new System.Drawing.Point(12, 120);
+            dgvPaiements.Name = "dgvPaiements";
+            dgvPaiements.ReadOnly = true;
+            dgvPaiements.RowHeadersWidth = 62;
+            dgvPaiements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            dgvPaiements.Size = new System.Drawing.Size(940, 350);
+            dgvPaiements.TabIndex = 0;
             // 
             // txtId
             // 
@@ -66,50 +65,41 @@
             txtId.ReadOnly = true;
             txtId.Width = 80;
             // 
-            // txtNom
+            // txtIdCommande
             // 
-            txtNom.DataPropertyName = "Nom";
-            txtNom.HeaderText = "Nom";
-            txtNom.MinimumWidth = 8;
-            txtNom.Name = "txtNom";
-            txtNom.ReadOnly = true;
-            txtNom.Width = 150;
+            txtIdCommande.DataPropertyName = "IdCommande";
+            txtIdCommande.HeaderText = "ID Com.";
+            txtIdCommande.MinimumWidth = 8;
+            txtIdCommande.Name = "txtIdCommande";
+            txtIdCommande.ReadOnly = true;
+            txtIdCommande.Width = 120;
             // 
-            // txtType
+            // txtMontant
             // 
-            txtType.DataPropertyName = "Type";
-            txtType.HeaderText = "Type";
-            txtType.MinimumWidth = 8;
-            txtType.Name = "txtType";
-            txtType.ReadOnly = true;
-            txtType.Width = 120;
+            txtMontant.DataPropertyName = "Montant";
+            txtMontant.HeaderText = "Montant (HTG)";
+            txtMontant.MinimumWidth = 8;
+            txtMontant.Name = "txtMontant";
+            txtMontant.ReadOnly = true;
+            txtMontant.Width = 150;
             // 
-            // txtPrix
+            // txtDatePaiement
             // 
-            txtPrix.DataPropertyName = "PrixUnitaire";
-            txtPrix.HeaderText = "Prix Unitaire (HTG)";
-            txtPrix.MinimumWidth = 8;
-            txtPrix.Name = "txtPrix";
-            txtPrix.ReadOnly = true;
-            txtPrix.Width = 130;
+            txtDatePaiement.DataPropertyName = "DatePaiement";
+            txtDatePaiement.HeaderText = "Date Paiement";
+            txtDatePaiement.MinimumWidth = 8;
+            txtDatePaiement.Name = "txtDatePaiement";
+            txtDatePaiement.ReadOnly = true;
+            txtDatePaiement.Width = 150;
             // 
-            // txtQuantite
+            // txtModePaiement
             // 
-            txtQuantite.DataPropertyName = "Quantite";
-            txtQuantite.HeaderText = "Quantité";
-            txtQuantite.MinimumWidth = 8;
-            txtQuantite.Name = "txtQuantite";
-            txtQuantite.ReadOnly = true;
-            txtQuantite.Width = 100;
-            // 
-            // txtDescription
-            // 
-            txtDescription.DataPropertyName = "Description";
-            txtDescription.HeaderText = "Description";
-            txtDescription.MinimumWidth = 8;
-            txtDescription.Name = "txtDescription";
-            txtDescription.ReadOnly = true;
-            txtDescription.Width = 300;
+            txtModePaiement.DataPropertyName = "ModePaiement";
+            txtModePaiement.HeaderText = "Mode Paiement";
+            txtModePaiement.MinimumWidth = 8;
+            txtModePaiement.Name = "txtModePaiement";
+            txtModePaiement.ReadOnly = true;
+            txtModePaiement.Width = 150;
             // 
             // btnAjouter
             // 
@@ -118,7 +108,7 @@
             btnAjouter.ForeColor = System.Drawing.Color.White;
             btnAjouter.Location = new System.Drawing.Point(800, 70);
             btnAjouter.Name = "btnAjouter";
-            btnAjouter.Size = new System.Drawing.Size(155, 41);
+            btnAjouter.Size = new System.Drawing.Size(152, 41);
             btnAjouter.TabIndex = 4;
             btnAjouter.Text = "Ajouter";
             btnAjouter.UseVisualStyleBackColor = false;
@@ -129,36 +119,33 @@
             btnModifier.BackColor = System.Drawing.Color.Gold;
             btnModifier.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
             btnModifier.ForeColor = System.Drawing.Color.Black;
-            btnModifier.Location = new System.Drawing.Point(639, 70);
+            btnModifier.Location = new System.Drawing.Point(642, 70);
             btnModifier.Name = "btnModifier";
-            btnModifier.Size = new System.Drawing.Size(155, 41);
+            btnModifier.Size = new System.Drawing.Size(152, 41);
             btnModifier.TabIndex = 3;
             btnModifier.Text = "Modifier";
             btnModifier.UseVisualStyleBackColor = false;
-            btnModifier.Click += btnModifier_Click;
             // 
             // btnSupprimer
             // 
             btnSupprimer.BackColor = System.Drawing.Color.Crimson;
             btnSupprimer.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
             btnSupprimer.ForeColor = System.Drawing.Color.White;
-            btnSupprimer.Location = new System.Drawing.Point(478, 70);
+            btnSupprimer.Location = new System.Drawing.Point(484, 70);
             btnSupprimer.Name = "btnSupprimer";
-            btnSupprimer.Size = new System.Drawing.Size(155, 41);
+            btnSupprimer.Size = new System.Drawing.Size(152, 41);
             btnSupprimer.TabIndex = 2;
             btnSupprimer.Text = "Supprimer";
             btnSupprimer.UseVisualStyleBackColor = false;
-            btnSupprimer.Click += btnSupprimer_Click;
             // 
             // txtRechercher
             // 
             txtRechercher.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
             txtRechercher.Location = new System.Drawing.Point(12, 75);
             txtRechercher.Name = "txtRechercher";
-            txtRechercher.PlaceholderText = "Nom, type ou description...";
+            txtRechercher.PlaceholderText = "ID, ID Commande, montant, mode...";
             txtRechercher.Size = new System.Drawing.Size(400, 34);
             txtRechercher.TabIndex = 1;
-            txtRechercher.TextChanged += txtRechercher_TextChanged;
             // 
             // lblRechercher
             // 
@@ -174,33 +161,33 @@
             // 
             lblNombreResultats.AutoSize = true;
             lblNombreResultats.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-            lblNombreResultats.ForeColor = System.Drawing.Color.RoyalBlue;
-            lblNombreResultats.Location = new System.Drawing.Point(420, 380);
+            lblNombreResultats.ForeColor = System.Drawing.Color.DimGray;
+            lblNombreResultats.Location = new System.Drawing.Point(420, 80);
             lblNombreResultats.Name = "lblNombreResultats";
             lblNombreResultats.Size = new System.Drawing.Size(0, 25);
             lblNombreResultats.TabIndex = 6;
             // 
-            // AfficherMenuForm
+            // AfficherPaiementForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(967, 460);
+            ClientSize = new System.Drawing.Size(964, 482);
             Controls.Add(lblNombreResultats);
             Controls.Add(lblRechercher);
             Controls.Add(txtRechercher);
             Controls.Add(btnSupprimer);
             Controls.Add(btnModifier);
             Controls.Add(btnAjouter);
-            Controls.Add(dgvMenus);
-            Text = "Liste des menus";
-            ((System.ComponentModel.ISupportInitialize)dgvMenus).EndInit();
+            Controls.Add(dgvPaiements);
+            Text = "Liste des paiements";
+            ((System.ComponentModel.ISupportInitialize)dgvPaiements).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvMenus;
+        private System.Windows.Forms.DataGridView dgvPaiements;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnModifier;
         private System.Windows.Forms.Button btnSupprimer;
@@ -208,10 +195,9 @@
         private System.Windows.Forms.Label lblRechercher;
         private System.Windows.Forms.Label lblNombreResultats;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtNom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtPrix;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtQuantite;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txtDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txtIdCommande;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txtMontant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txtDatePaiement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txtModePaiement;
     }
 }

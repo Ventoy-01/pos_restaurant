@@ -27,6 +27,21 @@
       <Compile Update="Views\Clients\AfficherClientForm.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Views\Clients\ModifierClientForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\Paiements\AfficherPaiementForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\Paiements\AjouterPaiementForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\Paiements\ModifierPaiementForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\Users\Login.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

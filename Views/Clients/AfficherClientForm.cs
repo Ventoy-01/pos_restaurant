@@ -1,4 +1,6 @@
-﻿namespace Pos_Restaurant.Views.Clients;
+﻿using Pos_Restaurant.Models;
+
+namespace Pos_Restaurant.Views.Clients;
 
 using Pos_Restaurant.Controllers;
 
@@ -14,6 +16,57 @@ public partial class AfficherClientForm : Form
     }
 
     
+    
+    private void ChargerClients()
+    {
+        dgvClients.AutoGenerateColumns = false;
+        dgvClients.DataSource = controller.ListerClients();
+
+        lblNombreResultats.Text = "";
+        
+        Console.WriteLine($"il y a {controller.ListerClients().Count} clients");
+    }
+    
+    private void txtRechercher_TextChanged(object sender, EventArgs e)
+    {
+        // Version sans délai - recherche immédiate
+        string critere = txtRechercher.Text.Trim();
+    
+        if (string.IsNullOrWhiteSpace(critere))
+        {
+            ChargerClients();
+            return;
+        }
+        try
+        {
+            var clients = controller.ListerClients()
+                .Where(c => 
+                    (c.Id.ToString()).Contains(critere) ||
+                    (c.Nom ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase) ||
+                    (c.Prenom ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase) ||
+                    (c.Telephone ?? "").Contains(critere) ||
+                    (c.Email ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase) ||
+                    (c.MontantDette.ToString() ?? "").Contains(critere))
+                .ToList();
+
+            dgvClients.DataSource = clients;
+        
+            // afficher le nombre de résultats
+
+            lblNombreResultats.Text = $"{clients.Count} client(s) trouvé(s)";
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Erreur lors de la recherche : {ex.Message}", "Erreur", 
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+    
+    /// <summary>
+    /// /////////////// logique  bouton ///////////////
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void btnAjouter_Click(object sender, EventArgs e)
     {
         AjouterClientForm formAjout = new AjouterClientForm();
@@ -27,15 +80,6 @@ public partial class AfficherClientForm : Form
         // Recharger la liste après fermeture
         ChargerClients();
     }
-    
-    private void ChargerClients()
-    {
-        dgvClients.AutoGenerateColumns = false;
-        dgvClients.DataSource = controller.ListerClients();
-        
-        Console.WriteLine($"il y a {controller.ListerClients().Count} clients");
-    }
-
 
     private void btnSupprimer_Click(object sender, EventArgs e)
     {
@@ -75,5 +119,24 @@ public partial class AfficherClientForm : Form
         }
     }
 
-    
+
+    private void btnModifier_Click(object sender, EventArgs e)
+    {
+        //verifier si une ligne est selectionnée
+        if (dgvClients.CurrentRow != null)
+        {
+            ClientsModel client = (ClientsModel)dgvClients.SelectedRows[0].DataBoundItem;
+
+            using (ModifierClientForm formModif = new ModifierClientForm(client))
+            {
+                formModif.Owner = this;
+                formModif.ShowDialog();
+                ChargerClients(); 
+            }
+        }
+        else
+        {
+            MessageBox.Show("Veuillez sélectionner un client à modifier.");
+        }
+    }
 }

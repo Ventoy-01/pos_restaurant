@@ -1,0 +1,66 @@
+﻿using Pos_Restaurant.Data;
+
+namespace Pos_Restaurant.Dao;
+
+using MySqlConnector;
+using Pos_Restaurant.Models;
+using Pos_Restaurant.Services;
+
+
+public class PaiementsDao : IDao<PaiementsModel>
+{
+    private MySqlConnection conn = null;
+    private MySqlCommand cmd = null;
+    
+    public PaiementsDao()
+    {
+        
+    }
+
+    public int Enregistrer(PaiementsModel e)
+    {
+        try
+        {
+            conn = DbConnection.GetConnection();
+            conn.Open();
+            string sql = "INSERT INTO paiements (IdCommande, Montant,  ModePaiement) " +
+                         "VALUES (@IdCommande, @Montant, @ModePaiement)";
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@IdCommande", e.IdCommande);
+                cmd.Parameters.AddWithValue("@Montant", e.Montant);
+                cmd.Parameters.AddWithValue("@ModePaiement", e.ModePaiement);
+
+                int result = cmd.ExecuteNonQuery();
+                return result;
+                
+            }
+            
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+            throw;
+        }
+    }
+
+    public int Modifier(PaiementsModel e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int Supprimer(string id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public PaiementsModel Rechercher(string id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<PaiementsModel> Lister()
+    {
+        throw new NotImplementedException();
+    }
+}

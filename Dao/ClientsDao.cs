@@ -63,7 +63,43 @@ public class ClientsDao:IDao<ClientsModel>
 
     public int Modifier(ClientsModel e)
     {
-        throw new NotImplementedException();
+        try
+        {
+            conn = DbConnection.GetConnection();
+            conn.Open();
+            string req = @"UPDATE clients 
+                           SET Nom = @Nom, Prenom = @Prenom, Sexe = @Sexe, Telephone = @Telephone, 
+                               Email = @Email, MontantDette = @MontantDette 
+                           WHERE Id = @Id";
+            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            {
+                cmd.Parameters.AddWithValue("@Nom", e.Nom);
+                cmd.Parameters.AddWithValue("@Prenom", e.Prenom);
+                cmd.Parameters.AddWithValue("@Sexe", e.Sexe);
+                cmd.Parameters.AddWithValue("@Telephone", e.Telephone);
+                cmd.Parameters.AddWithValue("@Email", e.Email);
+                cmd.Parameters.AddWithValue("@MontantDette", e.MontantDette);
+                cmd.Parameters.AddWithValue("@Id", e.Id);
+
+                int result = cmd.ExecuteNonQuery();
+                return result;
+            }
+
+        }
+        catch (MySqlException ex)
+        {
+            throw new Exception($"Erreur MySQL lors de la modification: {ex.Message}", ex);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erreur lors de la modification du client: {ex.Message}", ex);
+        }
+        finally
+        {
+            // Fermer la connexion
+            if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                conn.Close();
+        }
     }
 
     public int Supprimer(string id)
