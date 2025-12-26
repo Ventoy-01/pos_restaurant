@@ -1,7 +1,9 @@
-using Pos_Restaurant.Models;
-using Pos_Restaurant.Dao;
 namespace Pos_Restaurant;
 
+using Pos_Restaurant.Models;
+using Pos_Restaurant.Dao;
+using Pos_Restaurant.Views.Menus;
+using Pos_Restaurant.Views.Clients;
 static class Program
 {
     /// <summary>
@@ -11,15 +13,11 @@ static class Program
     static void Main()
     {
         
-        MenuDao dao = new MenuDao();
-		 	
-        MenusModel menumodel = new MenusModel("465", "dfyvg");
-        dao.Save(menumodel);
-        
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new MainForm());
+        Application.Run(new AfficherClientForm());
+        // Application.Run(new MainForm());
     }
 }
 

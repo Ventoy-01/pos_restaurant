@@ -1,19 +1,19 @@
 
 
-using MySql.Data.MySqlClient;
+// using MySql.Data.MySqlClient;
+using MySqlConnector;
 using System;
 
 namespace Pos_Restaurant.Data
 {
     public class DbConnection
     {
-        private static string connectionString = "Server=localhost; Database=pos; Uid=root; Pwd=vinchysql";
-
+        public static string connectionString = "Server=127.0.0.1;Port=3310;Database=pos;Uid=root;Pwd=jonas;";
         public static MySqlConnection GetConnection()
         {
             return new MySqlConnection(connectionString);
         }
-        
+
         public static (bool Success, string ErrorMessage) TestConnection()
             {
                 try
@@ -34,42 +34,28 @@ namespace Pos_Restaurant.Data
                     return (false, $"Erreur: {ex.Message}");
                 }
             }
-        // public static bool TestConnection1()
-        // {
-        //     try
-        //     {
-        //         using (var conn = GetConnection())
-        //         {
-        //             conn.Open();
-        //             return true;
-        //         }
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return false;
-        //     }
-        // }
-        public static void CloseConnection(MySqlDataReader dr, MySqlCommand cmd, MySqlConnection conn)
-        {
-            try
+
+            public static void CloseConnection(MySqlDataReader dr, MySqlCommand cmd, MySqlConnection conn)
             {
-                if (dr != null && !dr.IsClosed)
+                try
                 {
-                    dr.Close();
+                    if (dr != null && !dr.IsClosed)
+                    {
+                        dr.Close();
+                    }
+                    if (cmd != null)
+                    {
+                        cmd.Dispose();
+                    }
+                    if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
                 }
-                if (cmd != null)
+                catch (Exception)
                 {
-                    cmd.Dispose();
-                }
-                if (conn != null && conn.State == System.Data.ConnectionState.Open)
-                {
-                    conn.Close();
+                    Console.WriteLine("Erreur lors de la fermeture des ressources de la base de données.");
                 }
             }
-            catch (Exception)
-            {
-                // Log l'erreur si nécessaire
-            }
-        }
     }
 }

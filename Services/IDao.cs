@@ -2,14 +2,14 @@ namespace Pos_Restaurant.Services;
 
 public interface IDao<T>
 {
-		void Save(T s);
-		
-		void Update(T s);
-		
-		void Delete(String id);
-		
-		T Details (String s);
-	
-		List<T> Display();
-    
+		int Enregistrer(T e);
+
+		int Modifier(T e);
+
+		int Supprimer(String id);
+
+		T Rechercher(String id);
+
+		List<T> Lister();
+
 }
