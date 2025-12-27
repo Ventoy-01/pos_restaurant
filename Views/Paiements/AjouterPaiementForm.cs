@@ -8,7 +8,7 @@ namespace Pos_Restaurant.Views.Paiements
     public partial class AjouterPaiementForm : Form
     {
         private PaiementsController controller;
-        private CommandesController commandesController;
+        // priva te CommandesController commandesController;
         
         public AjouterPaiementForm()
         {
@@ -39,10 +39,10 @@ namespace Pos_Restaurant.Views.Paiements
                 // Exemple : Récupérer les commandes non payées
                 comboIdCommande.Items.Clear();
                 
-               List <CommandesModel> commandes = commandesController.ListerCommandes();
-               foreach (var commande in commandes)
+               // List <CommandesModel> commandes = commandesController.ListerCommandes();
+               // foreach (var commande in commandes)
                {
-                     comboIdCommande.Items.Add($"{commande.Id} - {commande.IdClient} - {commande.Statut}");
+                     // comboIdCommande.Items.Add($"{commande.Id} - {commande.IdClient} - {commande.Statut}");
                    
                }
                

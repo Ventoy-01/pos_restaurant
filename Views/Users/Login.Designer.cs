@@ -110,7 +110,8 @@
             btnLogin.TabIndex = 7;
             btnLogin.Text = "🔓 Se Connecter";
             btnLogin.UseVisualStyleBackColor = false;
-            // 
+            btnLogin.Click += btnLogin_Click;
+                //
             // lblForgetPassword
             // 
             lblForgetPassword.Cursor = System.Windows.Forms.Cursors.Hand;

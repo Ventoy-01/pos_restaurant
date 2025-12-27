@@ -247,7 +247,7 @@ public class UsersDao : IDao<UsersModel>
         {
             conn = DbConnection.GetConnection();
             conn.Open();
-            string req = @"SELECT COUNT(*) FROM users WHERE Username=@Username AND Password=@Password";
+            string req = @"SELECT * FROM users WHERE Username=@Username AND Password=@Password";
             using (MySqlCommand cmd = new MySqlCommand(req, conn))
             {
                 cmd.Parameters.AddWithValue("@Username", user);

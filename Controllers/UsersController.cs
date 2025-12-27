@@ -89,7 +89,8 @@ public class UsersController
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw new Exception("Erreur lors de l'authentification de l'utilisateur.", e);
-        }
+            result.Add(false);
+            result.Add(null);
+            return result;        }
     }
 }
