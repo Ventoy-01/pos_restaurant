@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using Pos_Restaurant.Models;
+using System.Linq;
 using Pos_Restaurant.Controllers;
 
 namespace Pos_Restaurant.Views.Paiements
 {
     public partial class AjouterPaiementForm : Form
-    {
+    {   
         private PaiementsController controller;
         private CommandesController commandesController;
         
@@ -14,21 +15,23 @@ namespace Pos_Restaurant.Views.Paiements
         {
             InitializeComponent();
             controller = new PaiementsController();
+            commandesController = new CommandesController();
             InitialiserFormulaire();
+            
         }
 
         private void InitialiserFormulaire()
         {
             // Initialiser la date à aujourd'hui
-            dtpDatePaiement.Value = DateTime.Now;
-            
+            dtpDatePaiement.Value = DateTime.Today;
+            dtpDatePaiement.MaxDate = DateTime.Today.AddDays(1).AddTicks(-1); 
+
             
             // Initialiser le montant à 0
             txtMontant.PlaceholderText = "0.00";
             
             // Initialiser le mode de paiement par défaut
             comboModePaiement.SelectedIndex = 0;
-            
             ChargerCommandes();
         }
 
@@ -36,14 +39,22 @@ namespace Pos_Restaurant.Views.Paiements
         {
             try
             {
-                // Exemple : Récupérer les commandes non payées
                 comboIdCommande.Items.Clear();
                 
                List <CommandesModel> commandes = commandesController.ListerCommandes();
-                foreach (var commande in commandes)
+               List<PaiementsModel> paiements = controller.ListerPaiement();
+               
+                // Récupérer les commandes non payées
+               List<CommandesModel> commandesSansPaiement = (
+                   from cmd in commandes
+                   join pmt in paiements on cmd.Id equals pmt.IdCommande into groupePaiements
+                   where groupePaiements.Count() == 0
+                   select cmd
+               ).ToList();
+               
+               foreach (var commande in commandesSansPaiement)
                {
-                     comboIdCommande.Items.Add($"{commande.Id} - {commande.IdClient} ");
-                   
+                   comboIdCommande.Items.Add($"{commande.Id} - {commande.IdClient} ");
                }
                 
                 if (comboIdCommande.Items.Count > 0)
@@ -62,6 +73,18 @@ namespace Pos_Restaurant.Views.Paiements
         
             try
             {
+                if (!double.TryParse(txtMontant.Text, out double montant) || montant <= 0)
+                {
+                    AfficherMessage("Veuillez saisir un montant valide supérieur à 0.", "Erreur", 
+                        MessageBoxIcon.Error);
+                    return; 
+                }
+
+                if (dtpDatePaiement.Value > DateTime.Now)
+                {
+                    AfficherMessage("La date de paiement ne peut pas être dans le futur.", "Date invalide",  MessageBoxIcon.Warning);
+                    dtpDatePaiement.Value = DateTime.Now;
+                }
                 // Créer l'objet paiement
                 var paiement = new PaiementsModel
                 {
@@ -70,6 +93,17 @@ namespace Pos_Restaurant.Views.Paiements
                     DatePaiement = dtpDatePaiement.Value,
                     ModePaiement = comboModePaiement.Text
                 };
+                if (paiement.Montant < ExtrairePrixTotalCommande())
+                {
+                    AfficherMessage($"Paiement insuffisance, Montant Total {ExtrairePrixTotalCommande()}", "Erreur", MessageBoxIcon.Error);
+                    return;
+                }
+                if (paiement.Montant > ExtrairePrixTotalCommande())
+                {
+                    AfficherMessage($"Paiement Trop eleve, Montant Total {ExtrairePrixTotalCommande()}", "Erreur", MessageBoxIcon.Error);
+                    return;
+                }
+              
         
                 // Appeler le contrôleur
                 bool succes = controller.AjouterPaiement(paiement);
@@ -94,8 +128,7 @@ namespace Pos_Restaurant.Views.Paiements
         //
         private int ExtraireIdCommande()
         {
-            // Extraire l'ID de commande du texte sélectionné
-            // Format attendu : "ID - Description - Montant"
+
             if (comboIdCommande.SelectedItem != null)
             {
                 string texte = comboIdCommande.SelectedItem.ToString();
@@ -106,8 +139,53 @@ namespace Pos_Restaurant.Views.Paiements
                         return id;
                 }
             }
-            return 0;
+            // return 0;
+            return 1;
         }
+
+        private Double ExtrairePrixTotalCommande()
+        {
+            List<CommandesModel> commandes = commandesController.ListerCommandes();
+            int idCommande = ExtraireIdCommande();
+
+            // return commandes.FirstOrDefault(c => c.Id == idCommande)?.PrixTotal ?? 0.0;
+            return 5;
+        }
+        private void txtMontant_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse(txtMontant.Text, out double montantSaisi))
+            {
+                double prixTotalAPayer = ExtrairePrixTotalCommande();
+
+                if (montantSaisi <= 0)
+                {
+                    lblStatutPrix.Text = "Veuillez saisir un montant";
+                    lblStatutPrix.ForeColor = Color.Orange;
+                }
+                else if (montantSaisi < prixTotalAPayer)
+                {
+                    lblStatutPrix.Text = "Montant insuffisant (Reste : " + (prixTotalAPayer - montantSaisi).ToString("N2") + ")";
+                    lblStatutPrix.ForeColor = Color.Red;
+                }
+                else if (montantSaisi > prixTotalAPayer)
+                {
+                    lblStatutPrix.Text = "Montant trop élevé (Trop-perçu : " + (montantSaisi - prixTotalAPayer).ToString("N2") + ")";
+                    lblStatutPrix.ForeColor = Color.Red;
+                }
+                else 
+                {
+                    lblStatutPrix.Text = "Montant exact - Prêt à valider";
+                    lblStatutPrix.ForeColor = Color.Green;
+                }
+            }
+            else
+            {
+                lblStatutPrix.Text = "Saisie invalide";
+                lblStatutPrix.ForeColor = Color.Red;
+            }
+        }
+
+
         //
         private void btnVider_Click(object sender, EventArgs e)
         {
@@ -135,8 +213,7 @@ namespace Pos_Restaurant.Views.Paiements
             {
                 e.Handled = true;
             }
-        
-            // Permettre un seul point décimal
+            //un seul point
             if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
             {
                 e.Handled = true;

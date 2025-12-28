@@ -125,6 +125,7 @@
             btnModifier.TabIndex = 3;
             btnModifier.Text = "Modifier";
             btnModifier.UseVisualStyleBackColor = false;
+            btnModifier.Click += btnModifier_Click;
             // 
             // btnSupprimer
             // 
@@ -137,6 +138,7 @@
             btnSupprimer.TabIndex = 2;
             btnSupprimer.Text = "Supprimer";
             btnSupprimer.UseVisualStyleBackColor = false;
+            btnSupprimer.Click += btnSupprimer_Click;
             // 
             // txtRechercher
             // 
@@ -146,6 +148,7 @@
             txtRechercher.PlaceholderText = "ID, ID Commande, montant, mode...";
             txtRechercher.Size = new System.Drawing.Size(400, 34);
             txtRechercher.TabIndex = 1;
+            txtRechercher.TextChanged += txtRechercher_TextChanged;
             // 
             // lblRechercher
             // 
@@ -161,8 +164,8 @@
             // 
             lblNombreResultats.AutoSize = true;
             lblNombreResultats.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-            lblNombreResultats.ForeColor = System.Drawing.Color.DimGray;
-            lblNombreResultats.Location = new System.Drawing.Point(420, 80);
+            lblNombreResultats.ForeColor = System.Drawing.Color.RoyalBlue;
+            lblNombreResultats.Location = new System.Drawing.Point(420, 380);
             lblNombreResultats.Name = "lblNombreResultats";
             lblNombreResultats.Size = new System.Drawing.Size(0, 25);
             lblNombreResultats.TabIndex = 6;

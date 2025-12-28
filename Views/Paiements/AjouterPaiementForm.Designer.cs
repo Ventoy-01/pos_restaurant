@@ -33,6 +33,7 @@
             comboIdCommande = new System.Windows.Forms.ComboBox();
             lblMontant = new System.Windows.Forms.Label();
             txtMontant = new System.Windows.Forms.TextBox();
+            lblStatutPrix = new System.Windows.Forms.Label();
             lblDatePaiement = new System.Windows.Forms.Label();
             dtpDatePaiement = new System.Windows.Forms.DateTimePicker();
             lblModePaiement = new System.Windows.Forms.Label();
@@ -97,7 +98,8 @@
             txtMontant.Size = new System.Drawing.Size(350, 34);
             txtMontant.TabIndex = 2;
             txtMontant.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // txtMontant.KeyPress += txtMontant_KeyPress;
+            txtMontant.KeyPress += txtMontant_KeyPress;
+            txtMontant.TextChanged += txtMontant_TextChanged;
             // 
             // lblMontantHTG
             // 
@@ -109,6 +111,14 @@
             lblMontantHTG.Size = new System.Drawing.Size(54, 28);
             lblMontantHTG.TabIndex = 5;
             lblMontantHTG.Text = "HTG";
+            //
+
+            // lblStatutPrix
+            lblStatutPrix.AutoSize = true;
+            lblStatutPrix.Location = new System.Drawing.Point(380, 175);
+            lblStatutPrix.Name = "lblStatutPrix";
+            lblStatutPrix.Size = new System.Drawing.Size(0, 13);
+
             // 
             // lblDatePaiement
             // 
@@ -208,6 +218,7 @@
             Controls.Add(lblMontantHTG);
             Controls.Add(txtMontant);
             Controls.Add(lblMontant);
+            Controls.Add(lblStatutPrix);
             Controls.Add(comboIdCommande);
             Controls.Add(lblIdCommande);
             Controls.Add(lblTitre);
@@ -229,6 +240,7 @@
         private System.Windows.Forms.Label lblMontant;
         private System.Windows.Forms.TextBox txtMontant;
         private System.Windows.Forms.Label lblMontantHTG;
+        private System.Windows.Forms.Label lblStatutPrix;
         private System.Windows.Forms.Label lblDatePaiement;
         private System.Windows.Forms.DateTimePicker dtpDatePaiement;
         private System.Windows.Forms.Label lblModePaiement;

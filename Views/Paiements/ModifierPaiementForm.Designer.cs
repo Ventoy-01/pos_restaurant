@@ -39,8 +39,6 @@
             dtpDatePaiement = new System.Windows.Forms.DateTimePicker();
             lblModePaiement = new System.Windows.Forms.Label();
             comboModePaiement = new System.Windows.Forms.ComboBox();
-            lblStatut = new System.Windows.Forms.Label();
-            comboStatut = new System.Windows.Forms.ComboBox();
             btnEnregistrer = new System.Windows.Forms.Button();
             btnAnnuler = new System.Windows.Forms.Button();
             SuspendLayout();
@@ -161,35 +159,13 @@
             comboModePaiement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboModePaiement.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
             comboModePaiement.FormattingEnabled = true;
-            comboModePaiement.Items.AddRange(new object[] { "Espèces", "Carte bancaire", "Chèque", "Mobile Money", "Virement", "Autre" });
+            comboModePaiement.Items.AddRange(new object[] { "Cash", "Carte debit", "Carte Credit", "Cheque" });
             comboModePaiement.Location = new System.Drawing.Point(250, 297);
             comboModePaiement.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             comboModePaiement.Name = "comboModePaiement";
             comboModePaiement.Size = new System.Drawing.Size(414, 36);
             comboModePaiement.TabIndex = 4;
-            // 
-            // lblStatut
-            // 
-            lblStatut.AutoSize = true;
-            lblStatut.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-            lblStatut.Location = new System.Drawing.Point(50, 360);
-            lblStatut.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            lblStatut.Name = "lblStatut";
-            lblStatut.Size = new System.Drawing.Size(65, 28);
-            lblStatut.TabIndex = 11;
-            lblStatut.Text = "Statut :";
-            // 
-            // comboStatut
-            // 
-            comboStatut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboStatut.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
-            comboStatut.FormattingEnabled = true;
-            comboStatut.Items.AddRange(new object[] { "Complété", "Partiel", "En attente", "Annulé", "Remboursé" });
-            comboStatut.Location = new System.Drawing.Point(250, 357);
-            comboStatut.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            comboStatut.Name = "comboStatut";
-            comboStatut.Size = new System.Drawing.Size(414, 36);
-            comboStatut.TabIndex = 5;
+
             // 
             // btnEnregistrer
             // 
@@ -227,8 +203,6 @@
             ClientSize = new System.Drawing.Size(723, 520);
             Controls.Add(btnAnnuler);
             Controls.Add(btnEnregistrer);
-            Controls.Add(comboStatut);
-            Controls.Add(lblStatut);
             Controls.Add(comboModePaiement);
             Controls.Add(lblModePaiement);
             Controls.Add(dtpDatePaiement);
@@ -263,8 +237,6 @@
         private System.Windows.Forms.DateTimePicker dtpDatePaiement;
         private System.Windows.Forms.Label lblModePaiement;
         private System.Windows.Forms.ComboBox comboModePaiement;
-        private System.Windows.Forms.Label lblStatut;
-        private System.Windows.Forms.ComboBox comboStatut;
         private System.Windows.Forms.Button btnEnregistrer;
         private System.Windows.Forms.Button btnAnnuler;
     }

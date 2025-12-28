@@ -31,6 +31,7 @@ namespace Pos_Restaurant.Views.Paiements
             
             // Charger la date
             dtpDatePaiement.Value = paiementCourant.DatePaiement;
+            dtpDatePaiement.MaxDate = DateTime.Today.AddDays(1).AddTicks(-1);
             
             // Charger le mode de paiement
             comboModePaiement.Text = paiementCourant.ModePaiement;
@@ -57,21 +58,21 @@ namespace Pos_Restaurant.Views.Paiements
 
                 if (succes)
                 {
-                    MessageBox.Show("Paiement modifié avec succès !", 
-                        "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    AfficherMessage("Paiement modifié avec succès !", 
+                        "Succès");
                     DialogResult = DialogResult.OK;
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show("Échec de la modification du paiement.", 
-                        "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AfficherMessage("Échec de la modification du paiement.", 
+                        "Erreur",  MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur lors de la modification : {ex.Message}", 
-                    "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AfficherMessage($"Erreur lors de la modification : {ex.Message}", 
+                    "Erreur",  MessageBoxIcon.Error);
             }
         }
 
@@ -80,8 +81,8 @@ namespace Pos_Restaurant.Views.Paiements
             // Validation de l'ID commande
             if (!int.TryParse(txtIdCommande.Text, out int idCommande) || idCommande <= 0)
             {
-                MessageBox.Show("ID Commande invalide.", 
-                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AfficherMessage("ID Commande invalide.", 
+                    "Validation",  MessageBoxIcon.Warning);
                 txtIdCommande.Focus();
                 txtIdCommande.SelectAll();
                 return false;
@@ -90,8 +91,8 @@ namespace Pos_Restaurant.Views.Paiements
             // Validation du montant
             if (!double.TryParse(txtMontant.Text, out double montant) || montant <= 0)
             {
-                MessageBox.Show("Veuillez entrer un montant valide (supérieur à 0).", 
-                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AfficherMessage("Veuillez entrer un montant valide (supérieur à 0).", 
+                    "Validation", MessageBoxIcon.Warning);
                 txtMontant.Focus();
                 txtMontant.SelectAll();
                 return false;
@@ -100,8 +101,8 @@ namespace Pos_Restaurant.Views.Paiements
             // Validation du mode de paiement
             if (string.IsNullOrEmpty(comboModePaiement.Text))
             {
-                MessageBox.Show("Veuillez sélectionner un mode de paiement.", 
-                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AfficherMessage("Veuillez sélectionner un mode de paiement.", 
+                    "Validation",  MessageBoxIcon.Warning);
                 comboModePaiement.Focus();
                 return false;
             }
@@ -109,20 +110,12 @@ namespace Pos_Restaurant.Views.Paiements
             // Validation de la date (ne pas permettre les dates futures)
             if (dtpDatePaiement.Value > DateTime.Now)
             {
-                MessageBox.Show("La date de paiement ne peut pas être dans le futur.", 
-                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AfficherMessage("La date de paiement ne peut pas être dans le futur.", 
+                    "Validation",  MessageBoxIcon.Warning);
                 dtpDatePaiement.Focus();
                 return false;
             }
-
-            // Validation du statut (si applicable)
-            if (comboStatut != null && string.IsNullOrEmpty(comboStatut.Text))
-            {
-                MessageBox.Show("Veuillez sélectionner un statut.", 
-                    "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                comboStatut.Focus();
-                return false;
-            }
+            
 
             return true;
         }
@@ -156,5 +149,9 @@ namespace Pos_Restaurant.Views.Paiements
                 e.Handled = true;
             }
         }
-    }
+        
+        private void AfficherMessage(string message, string titre, MessageBoxIcon icone = MessageBoxIcon.Information)
+        {
+            MessageBox.Show(message, titre, MessageBoxButtons.OK, icone);
+        }    }
 }
