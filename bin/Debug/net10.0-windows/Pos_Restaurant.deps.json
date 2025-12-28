@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v10.0": {
       "Pos_Restaurant/1.0.0": {
         "dependencies": {
-          "MySqlConnector": "2.5.0"
+          "MySqlConnector": "2.5.0",
+          "MySql.Data": "8.0.30.0"
         },
         "runtime": {
           "Pos_Restaurant.dll": {}
@@ -44,6 +45,14 @@
             "fileVersion": "2.5.0.0"
           }
         }
+      },
+      "MySql.Data/8.0.30.0": {
+        "runtime": {
+          "MySql.Data.dll": {
+            "assemblyVersion": "8.0.30.0",
+            "fileVersion": "8.0.30.0"
+          }
+        }
       }
     }
   },
@@ -73,6 +82,11 @@
       "sha512": "sha512-hoAwfHHF8DlRRqwHOhN3u1KLi+XbX/4LPS7Anfa+SYC97vRyIfdEOEEfj1L50q01Ik8aDNvmDrNmu/VPFiAiaQ==",
       "path": "mysqlconnector/2.5.0",
       "hashPath": "mysqlconnector.2.5.0.nupkg.sha512"
+    },
+    "MySql.Data/8.0.30.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
