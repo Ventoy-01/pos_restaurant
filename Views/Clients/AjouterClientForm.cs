@@ -12,7 +12,6 @@ public partial class AjouterClientForm : Form
         controller = new ClientsController();
     }
     
-        
     private void btnEnregistrer_Click(object sender, EventArgs e)
     {
         try

@@ -1,7 +1,9 @@
-using Pos_Restaurant.Views.Commandes;
+
+using Pos_Restaurant.Views.Users;
 
 namespace Pos_Restaurant;
 
+using Pos_Restaurant.Views.Paiements;
 using Pos_Restaurant.Models;
 using Pos_Restaurant.Dao;
 using Pos_Restaurant.Views.Menus;
@@ -18,8 +20,8 @@ static class Program
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new AfficherCommandeForm());
-        // Application.Run(new MainForm());
+        // Application.Run(new Login());
+        Application.Run(new MainForm());
     }
 }
 

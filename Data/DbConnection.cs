@@ -8,7 +8,7 @@ namespace Pos_Restaurant.Data
 {
     public class DbConnection
     {
-        public static string connectionString = "Server=127.0.0.1;Port=3306;Database=pos;Uid=root;Pwd=vinchysql;";
+        public static string connectionString = "Server=127.0.0.1;Port=3306;Database=pos;Uid=root;Pwd=;";
         public static MySqlConnection GetConnection()
         {
             return new MySqlConnection(connectionString);
@@ -24,7 +24,6 @@ namespace Pos_Restaurant.Data
                         return (true, "Connexion réussie");
                     }
                 }
-                // catch (MySql.Data.MySqlClient.MySqlException ex)
                 catch (MySqlException ex)
                 {
                     // Retourner le message d'erreur détaillé

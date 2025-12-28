@@ -2,6 +2,7 @@
 using Pos_Restaurant.Dao;
 using Pos_Restaurant.Models;
 using System.Collections.Generic;
+using Pos_Restaurant.Views.Menus;
 
 namespace Pos_Restaurant.Controllers
 {
@@ -70,7 +71,50 @@ namespace Pos_Restaurant.Controllers
                 throw;
             }
         }
-            
+        
+        public bool supprimerMenu(int menuId)
+        {
+            try
+            {
+                int result = menusDao.Supprimer(menuId.ToString());
+                return result > 0;
+    
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Erreur dans MenusController.Supprimer: {e.Message}");
+                throw;
+            }
+        }
+        
+        public MenusModel ObtenirMenuParId(int menuId)
+        {
+            try
+            {
+                return menusDao.Rechercher(menuId.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Erreur dans MenusController.ObtenirMenuParId: {e.Message}");
+                throw;
+            }
+        }
+
+        public bool ModifierMenu(MenusModel menu)
+        {
+            try
+            {
+                menusDao = new MenusDao();
+                int result = menusDao.Modifier(menu);
+                return result > 0;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         
     }
 }

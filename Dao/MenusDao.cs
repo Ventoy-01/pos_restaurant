@@ -80,7 +80,7 @@ namespace Pos_Restaurant.Dao
                               SET type = @type, 
                                   nom = @nom, 
                                   quantite = @qte, 
-                                  prix_unitaire = @prix, 
+                                  prixUnitaire = @prix, 
                                   description = @desc
                               WHERE id = @id";
                 

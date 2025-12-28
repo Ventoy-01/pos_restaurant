@@ -73,4 +73,29 @@ public class ClientsController
             throw;
         }
     }
+    
+    public bool ModifierClent(ClientsModel client)
+    {
+        try
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client), "Le client ne peut pas être null");
+            }
+
+            if (string.IsNullOrWhiteSpace(client.Nom) || string.IsNullOrWhiteSpace(client.Prenom))
+            {
+                throw new ArgumentException("Le nom et le prénom du client sont obligatoires");
+            }
+
+            int result = clientsDao.Modifier(client);
+
+            return result > 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erreur dans ClientsController.ModifierClient: {ex.Message}");
+            throw;
+        }
+    }
 }
