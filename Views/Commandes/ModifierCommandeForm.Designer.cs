@@ -16,8 +16,7 @@ partial class ModifierCommandeForm
     /// </summary>
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
 
-   
-    private MenusDao menusDao = new MenusDao();
+
 
     private List<MenusModel> menus = new MenusDao().Lister();
     List<ClientsModel> clients = new ClientsDao().Lister();
@@ -63,6 +62,7 @@ partial class ModifierCommandeForm
     private void InitializeComponent()
     {
         
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModifierCommandeForm));
         lblTitre = new System.Windows.Forms.Label();
         lblMenu = new System.Windows.Forms.Label();
         // txtNom = new System.Windows.Forms.TextBox();
@@ -95,7 +95,7 @@ partial class ModifierCommandeForm
         lblTitre.Name = "lblTitre";
         lblTitre.Size = new System.Drawing.Size(263, 33);
         lblTitre.TabIndex = 0;
-        lblTitre.Text = "NOUVELLE COMMANDE";
+        lblTitre.Text = "MODIFIER COMMANDE";
         // 
         // lblMenu
         // 
@@ -133,7 +133,7 @@ partial class ModifierCommandeForm
         // 
         //comboClient
         comboClient.FormattingEnabled = true;
-        // comboClient.Items.AddRange(new object[] {1,7});
+    
         foreach (var client in clients)
         {
             comboClient.Items.AddRange($"{client.Id} - {client.Nom}");

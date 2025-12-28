@@ -62,12 +62,12 @@ public partial class AfficherCommandeForm : Form
         {
             // 1. Récupérer l'ID 
             int commandeId = Convert.ToInt32(dgvCommandes.CurrentRow.Cells["txtId"].Value);
-            string nomClient = dgvCommandes.CurrentRow.Cells["txtNom"].Value?.ToString() ?? "ce client";
-            string prClient = dgvCommandes.CurrentRow.Cells["txtPrenom"].Value?.ToString() ?? "";
+            // string nomMenu = dgvCommandes.CurrentRow.Cells["comboMenu"].Value?.ToString() ?? "ce client";
+            // string nomClient = dgvCommandes.CurrentRow.Cells["comboClient"].Value?.ToString() ?? "";
     
             // 2. Demander confirmation
             DialogResult dialogResult = MessageBox.Show(
-                $"Voulez-vous vraiment supprimer {nomClient} {prClient} ?", 
+                $"Voulez-vous vraiment supprimer cette Commande de menu , pour le client  ?", 
                 "Confirmation de suppression", 
                 MessageBoxButtons.YesNo, 
                 MessageBoxIcon.Warning);
@@ -79,7 +79,7 @@ public partial class AfficherCommandeForm : Form
                     // 3. Appel au contrôleur 
                     controller.SupprimerCommande(commandeId);
                 
-                    MessageBox.Show("Client supprimé avec succès !");
+                    MessageBox.Show("Commande supprimé avec succès !");
                     ChargerCommandes(); // Rafraîchir la grille
                 }
                 catch (Exception ex)

@@ -1,3 +1,4 @@
+using System.Collections;
 using MySqlConnector;
 using Pos_Restaurant.Data;
 using Pos_Restaurant.Models;
@@ -118,7 +119,7 @@ public class CommandesDao : IDao<CommandesModel>
                 if (conn.State != System.Data.ConnectionState.Open)
                     conn.Open();
                 
-                string req = @"DELETE commandes  WHERE id = @id";
+                string req = @"DELETE from commandes  WHERE id = @id";
                 
                 using (cmd = new MySqlCommand(req, conn))
                 {
@@ -198,4 +199,51 @@ public class CommandesDao : IDao<CommandesModel>
             }  
         }
     
+        // public ArrayList ListerCommandeMenuClient()
+        // {
+        //     List<CommandesModel> commandes = new List<CommandesModel>();
+        //     try
+        //     {
+        //         conn = DbConnection.GetConnection();
+        //         conn.Open();
+        //         string req = @"SELECT * FROM commandes";
+        //         
+        //         
+        //         using (cmd = new MySqlCommand(req, conn))
+        //         {
+        //             dr = cmd.ExecuteReader();
+        //             
+        //             while (dr.Read())
+        //             {
+        //                 commandes.Add(new CommandesModel()
+        //                 {
+        //                     Id = dr.GetInt32("id"),
+        //                     IdMenu = dr.GetInt32("IdMenu"),
+        //                     IdClient = dr.GetInt32("IdClient"),
+        //                     Quantite = dr.GetInt32("Quantite"),
+        //                     PrixTotal = dr.GetDouble("prixTotal"),
+        //                     Description = dr.GetString("description")
+        //                 });
+        //             }
+        //             
+        //             return commandes;
+        //         }
+        //     }
+        //     catch (MySqlException ex)
+        //     {
+        //         throw new Exception($"Erreur MySQL lors du listage: {ex.Message}", ex);
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         throw new Exception($"Erreur lors du listage des menus: {ex.Message}", ex);
+        //     }
+        //     finally
+        //     {
+        //         if (dr != null && !dr.IsClosed)
+        //             dr.Close();
+        //         
+        //         if (conn != null && conn.State == System.Data.ConnectionState.Open)
+        //             conn.Close();
+        //     }  
+        // }
 }

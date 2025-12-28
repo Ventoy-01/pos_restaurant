@@ -151,7 +151,7 @@ partial class AfficherCommandeForm
         btnAjouter.BackColor = System.Drawing.Color.RoyalBlue;
         btnAjouter.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
         btnAjouter.ForeColor = System.Drawing.Color.White;
-        btnAjouter.Location = new System.Drawing.Point(672, 51);
+        btnAjouter.Location = new System.Drawing.Point(672, 90);
         btnAjouter.Name = "btnAjouter";
         btnAjouter.Size = new System.Drawing.Size(284, 45);
         btnAjouter.TabIndex = 1;
@@ -164,7 +164,7 @@ partial class AfficherCommandeForm
         btnModifier.BackColor = System.Drawing.Color.Gold;
         btnModifier.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
         btnModifier.ForeColor = System.Drawing.Color.Black;
-        btnModifier.Location = new System.Drawing.Point(639, 70);
+        btnModifier.Location = new System.Drawing.Point(439, 90);
         btnModifier.Name = "btnModifier";
         btnModifier.Size = new System.Drawing.Size(155, 41);
         btnModifier.TabIndex = 3;
@@ -177,7 +177,7 @@ partial class AfficherCommandeForm
         btnSupprimer.BackColor = System.Drawing.Color.Crimson;
         btnSupprimer.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
         btnSupprimer.ForeColor = System.Drawing.Color.White;
-        btnSupprimer.Location = new System.Drawing.Point(478, 70);
+        btnSupprimer.Location = new System.Drawing.Point(278, 90);
         btnSupprimer.Name = "btnSupprimer";
         btnSupprimer.Size = new System.Drawing.Size(155, 41);
         btnSupprimer.TabIndex = 2;

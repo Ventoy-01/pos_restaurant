@@ -17,10 +17,15 @@ public partial class ModifierCommandeForm : Form
     }
 
 
-    public void ChargerCommandeDansFormulaire()
+    private void ChargerCommandeDansFormulaire()
     {
-        
+        comboMenu.Text = commandeCourante.IdMenu.ToString();
+        comboClient.Text = commandeCourante.IdClient.ToString();
+        txtQuantite.Text = commandeCourante.Quantite.ToString();
+        txtPrixTotal.Text = commandeCourante.PrixTotal.ToString("0.00");
+        txtDescription.Text = commandeCourante.Description;
     }
+    
     private void btnEnregistrer_Click(object sender, EventArgs e)
     {
         
