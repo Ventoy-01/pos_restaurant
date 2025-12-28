@@ -5,11 +5,11 @@ using Pos_Restaurant.Models;
 
 public class PaiementsController
 {
-    private PaiementsDao paiements;
+    private PaiementsDao paiementsDao;
     
     public PaiementsController()
     {
-        paiements = new PaiementsDao();
+        paiementsDao = new PaiementsDao();
     }
     
     public bool AjouterPaiement(PaiementsModel paiement)
@@ -26,7 +26,7 @@ public class PaiementsController
                 throw new ArgumentException("Le montant doit être positif");
             }
             
-            int result = paiements.Enregistrer(paiement);
+            int result = paiementsDao.Enregistrer(paiement);
             return result > 0;
         }
         catch (Exception ex)
@@ -50,7 +50,7 @@ public class PaiementsController
                 throw new ArgumentException("Le montant doit être positif");
             }
             
-            int result = paiements.Modifier(paiement);
+            int result = paiementsDao.Modifier(paiement);
             return result > 0;
         }
         catch (Exception ex)
@@ -62,10 +62,10 @@ public class PaiementsController
 
     public List<PaiementsModel> ListerPaiement()
     {
+        
         try
         {
-
-            return paiements.Lister();
+            return paiementsDao.Lister();
         }
         catch (Exception e)
         {
@@ -83,7 +83,7 @@ public class PaiementsController
                 throw new ArgumentException("L'ID du paiement ne peut pas être vide", nameof(id));
             }
             
-            int result = paiements.Supprimer(id);
+            int result = paiementsDao.Supprimer(id);
             return result > 0;
         }
         catch (Exception ex)

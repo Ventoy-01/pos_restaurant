@@ -63,14 +63,6 @@ namespace Pos_Restaurant
         }
 
   
-                // "admin" => "👑",
-                // "manager" => "💼",
-                // "caissier" => "💰",
-                // "serveur" => "👨‍🍳",
-                // "cuisinier" => "👨‍🍳",
-               // _ => "👤"
-   
-
         private void AjouterEffetsHover()
         {
             foreach (Control control in panelSidebar.Controls)
@@ -321,23 +313,8 @@ namespace Pos_Restaurant
                 
                 // Retourner à l'écran de login
                 Login loginForm = new Login();
-                loginForm.Show();
                 this.Close();
-            }
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // Demander confirmation avant de fermer l'application
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                var result = MessageBox.Show("Voulez-vous vraiment quitter l'application ?", 
-                    "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
+                loginForm.Show();
             }
         }
 

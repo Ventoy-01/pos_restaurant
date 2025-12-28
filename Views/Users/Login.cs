@@ -26,16 +26,15 @@ using Pos_Restaurant.Models;
             // Validation
             if (string.IsNullOrEmpty(username))
             {
-                MessageBox.Show("👤 Veuillez entrer votre nom d'utilisateur",
-                    "Champ requis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AfficherMessage("👤 Veuillez entrer votre nom d'utilisateur",
+                    "Champ requis",  MessageBoxIcon.Warning);
                 txtUsername.Focus();
                 return;
             }
 
             if (string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("🔒 Veuillez entrer votre mot de passe",
-                    "Champ requis", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AfficherMessage("🔒 Veuillez entrer votre mot de passe","Champ requis", MessageBoxIcon.Warning);
                 txtPassword.Focus();
                 return;
             }
@@ -50,8 +49,8 @@ using Pos_Restaurant.Models;
                 if (result)
                 {
                     UsersModel user = (UsersModel)utilisateur;
-                    MessageBox.Show($"✅ Bienvenue, {user.Username} !",
-                        "Connexion réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    AfficherMessage($"Bienvenue, {user.Username} !",
+                        "Connexion réussie",  MessageBoxIcon.Information);
 
                     // Stocker l'utilisateur connecté (dans une classe statique par exemple)
                     SessionUtilisateur.UtilisateurCourant = user;
@@ -63,23 +62,23 @@ using Pos_Restaurant.Models;
                 }
                 else
                 {
-                    MessageBox.Show("❌ Nom d'utilisateur ou mot de passe incorrect",
-                        "Échec de connexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AfficherMessage(" Nom d'utilisateur ou mot de passe incorrect",
+                        "Échec de connexion",  MessageBoxIcon.Error);
                     txtPassword.SelectAll();
                     txtPassword.Focus();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"⚠️ Erreur de connexion : {ex.Message}",
-                    "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AfficherMessage($" Erreur de connexion : {ex.Message}",
+                    "Erreur",  MessageBoxIcon.Error);
             }
         }
 
         private void lblForgetPassword_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("📧 Veuillez contacter l'administrateur pour réinitialiser votre mot de passe.",
-                "Mot de passe oublié", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            AfficherMessage("📧 Veuillez contacter l'administrateur pour réinitialiser votre mot de passe.",
+                "Mot de passe oublié",  MessageBoxIcon.Information);
         }
 
         // private void txtUsername_Enter(object sender, EventArgs e)
@@ -129,6 +128,4 @@ using Pos_Restaurant.Models;
         {
             MessageBox.Show(message, titre, MessageBoxButtons.OK, icone);
         }
-        
-        
-        }
+}

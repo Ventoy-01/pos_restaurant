@@ -9,6 +9,7 @@ public class ClientsDao:IDao<ClientsModel>
 {
     private MySqlConnection conn = null;
     private MySqlCommand cmd = null;
+    private MySqlDataReader dr = null;
 
 
     //Ajouter un client
@@ -25,7 +26,7 @@ public class ClientsDao:IDao<ClientsModel>
             
             string req = @"INSERT INTO clients (Nom, Prenom, Sexe, Telephone, Email, MontantDette) 
                                VALUES (@Nom, @Prenom, @Sexe, @Telephone, @Email, @MontantDette)";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 // Ajouter les paramètres
                 cmd.Parameters.AddWithValue("@Nom", e.Nom);
@@ -71,7 +72,7 @@ public class ClientsDao:IDao<ClientsModel>
                            SET Nom = @Nom, Prenom = @Prenom, Sexe = @Sexe, Telephone = @Telephone, 
                                Email = @Email, MontantDette = @MontantDette 
                            WHERE Id = @Id";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 cmd.Parameters.AddWithValue("@Nom", e.Nom);
                 cmd.Parameters.AddWithValue("@Prenom", e.Prenom);
@@ -101,6 +102,10 @@ public class ClientsDao:IDao<ClientsModel>
                 conn.Close();
         }
     }
+    public ClientsModel Rechercher(string val)
+    {
+        throw new NotImplementedException();
+    }
 
     public int Supprimer(string id)
     {
@@ -111,7 +116,7 @@ public class ClientsDao:IDao<ClientsModel>
             conn = DbConnection.GetConnection();
             conn.Open();
             string req = "DELETE FROM clients WHERE Id = @Id";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 cmd.Parameters.AddWithValue("@Id", idValue);
                 int result = cmd.ExecuteNonQuery();
@@ -135,15 +140,9 @@ public class ClientsDao:IDao<ClientsModel>
         }
     }
 
-    public ClientsModel Rechercher(string id)
-    {
-        throw new NotImplementedException();
-    }
-
     public List<ClientsModel> Lister()
     {
         List<ClientsModel> clients = new List<ClientsModel>();
-        MySqlDataReader dr = null;
         try
         {
             // Établir la connexion
@@ -154,7 +153,7 @@ public class ClientsDao:IDao<ClientsModel>
 
             string req = "SELECT * FROM clients";
             
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 dr = cmd.ExecuteReader();
                

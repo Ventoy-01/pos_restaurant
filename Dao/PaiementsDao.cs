@@ -11,6 +11,7 @@ public class PaiementsDao : IDao<PaiementsModel>
 {
     private MySqlConnection conn = null;
     private MySqlCommand cmd = null;
+    private MySqlDataReader dr = null;
     
     public PaiementsDao()
     {
@@ -25,7 +26,7 @@ public class PaiementsDao : IDao<PaiementsModel>
             conn.Open();
             string sql = "INSERT INTO paiements (IdCommande, Montant,  ModePaiement) " +
                          "VALUES (@IdCommande, @Montant, @ModePaiement)";
-            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+            using ( cmd = new MySqlCommand(sql, conn))
             {
                 cmd.Parameters.AddWithValue("@IdCommande", e.IdCommande);
                 cmd.Parameters.AddWithValue("@Montant", e.Montant);
@@ -61,6 +62,49 @@ public class PaiementsDao : IDao<PaiementsModel>
 
     public List<PaiementsModel> Lister()
     {
-        throw new NotImplementedException();
+        List<PaiementsModel> paiements = new List<PaiementsModel>();
+        try
+        {
+            conn = DbConnection.GetConnection();
+            conn.Open();
+            string req = @"SELECT * FROM paiements";
+                
+                
+            using (cmd = new MySqlCommand(req, conn))
+            {
+                dr = cmd.ExecuteReader();
+                    
+                while (dr.Read())
+                {
+                    paiements.Add(new PaiementsModel()
+                    {
+                        Id = dr.GetInt32("Id"),
+                        IdCommande = dr.GetInt32("IdCommande"),
+                        Montant = dr.GetInt32("Montant"),
+                        DatePaiement = dr.GetDateTime("DatePaiement"),
+                        ModePaiement = dr.GetString("ModePaiement"),
+                    });
+                }
+                    
+                return paiements;
+            }
+        }
+        catch (MySqlException ex)
+        {
+            throw new Exception($"Erreur MySQL lors du listage: {ex.Message}", ex);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erreur lors du listage des menus: {ex.Message}", ex);
+        }
+        finally
+        {
+            if (dr != null && !dr.IsClosed)
+                dr.Close();
+                
+            if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                conn.Close();
+        }  
     }
+    
 }

@@ -30,6 +30,7 @@ public partial class AfficherMenuForm : Form
         if (string.IsNullOrWhiteSpace(critere))
         {
             ChargerMenus();
+            lblNombreResultats.Text = "";
             return;
         }
 

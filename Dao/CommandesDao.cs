@@ -10,6 +10,7 @@ public class CommandesDao : IDao<CommandesModel>
 
     private MySqlConnection conn = null;
     private MySqlCommand cmd = null;
+    private MySqlDataReader dr = null;
 
 
     //Ajouter une commande
@@ -27,7 +28,7 @@ public class CommandesDao : IDao<CommandesModel>
 
             string req = @"INSERT INTO commandes (IdMenu, IdClient, Quantite, PrixTotal, description) 
                                VALUES (@idMenu, @idClient,@Quantite, @PrixTotal, @description)";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 
                 // Ajouter les paramètres
@@ -122,6 +123,50 @@ public class CommandesDao : IDao<CommandesModel>
         //Lister Commande
         public List<CommandesModel> Lister()
         {
-            throw new NotImplementedException();
+            List<CommandesModel> commandes = new List<CommandesModel>();
+            try
+            {
+                conn = DbConnection.GetConnection();
+                conn.Open();
+                string req = @"SELECT * FROM commandes";
+                
+                
+                    using (cmd = new MySqlCommand(req, conn))
+                    {
+                        dr = cmd.ExecuteReader();
+                    
+                        while (dr.Read())
+                        {
+                            commandes.Add(new CommandesModel()
+                            {
+                                Id = dr.GetInt32("id"),
+                                IdMenu = dr.GetInt32("IdMenu"),
+                                IdClient = dr.GetInt32("IdClient"),
+                                Quantite = dr.GetInt32("Quantite"),
+                                PrixTotal = dr.GetDouble("prixTotal"),
+                                Description = dr.GetString("description")
+                            });
+                        }
+                    
+                        return commandes;
+                    }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception($"Erreur MySQL lors du listage: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erreur lors du listage des menus: {ex.Message}", ex);
+            }
+            finally
+            {
+                if (dr != null && !dr.IsClosed)
+                    dr.Close();
+                
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                    conn.Close();
+            }  
         }
+    
 }
