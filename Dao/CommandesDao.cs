@@ -110,7 +110,35 @@ public class CommandesDao : IDao<CommandesModel>
 //Supprimer Commande
         public int Supprimer(String val)
         {
-            throw new NotImplementedException();
+            int id = int.Parse(val);
+            try
+            {
+                conn = DbConnection.GetConnection();
+                
+                if (conn.State != System.Data.ConnectionState.Open)
+                    conn.Open();
+                
+                string req = @"DELETE commandes  WHERE id = @id";
+                
+                using (cmd = new MySqlCommand(req, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception($"Erreur MySQL lors de la suppression: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erreur lors de la suppression de la commande: {ex.Message}", ex);
+            }
+            finally
+            {
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                    conn.Close();
+            }
         }
 
         

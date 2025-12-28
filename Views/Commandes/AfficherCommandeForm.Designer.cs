@@ -50,6 +50,8 @@ partial class AfficherCommandeForm
         txtPrixTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
         txtDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
         btnAjouter = new System.Windows.Forms.Button();
+        btnModifier = new System.Windows.Forms.Button();
+        btnSupprimer = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)dgvCommandes).BeginInit();
         SuspendLayout();
         
@@ -157,12 +159,39 @@ partial class AfficherCommandeForm
         btnAjouter.UseVisualStyleBackColor = false;
         btnAjouter.Click += btnAjouter_Click;
         
+        // btnModifier
+        // 
+        btnModifier.BackColor = System.Drawing.Color.Gold;
+        btnModifier.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        btnModifier.ForeColor = System.Drawing.Color.Black;
+        btnModifier.Location = new System.Drawing.Point(639, 70);
+        btnModifier.Name = "btnModifier";
+        btnModifier.Size = new System.Drawing.Size(155, 41);
+        btnModifier.TabIndex = 3;
+        btnModifier.Text = "Modifier";
+        btnModifier.UseVisualStyleBackColor = false;
+        btnModifier.Click += btnModifier_Click;
+        // 
+        // btnSupprimer
+        // 
+        btnSupprimer.BackColor = System.Drawing.Color.Crimson;
+        btnSupprimer.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)0));
+        btnSupprimer.ForeColor = System.Drawing.Color.White;
+        btnSupprimer.Location = new System.Drawing.Point(478, 70);
+        btnSupprimer.Name = "btnSupprimer";
+        btnSupprimer.Size = new System.Drawing.Size(155, 41);
+        btnSupprimer.TabIndex = 2;
+        btnSupprimer.Text = "Supprimer";
+        btnSupprimer.UseVisualStyleBackColor = false;
+        btnSupprimer.Click += btnSupprimer_Click;
         
         
         AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(1000,500);
         Controls.Add(btnAjouter);
+        Controls.Add(btnModifier);
+        Controls.Add(btnSupprimer);
         Controls.Add(dgvCommandes);
         Text = "Liste des Commandes";
         ((System.ComponentModel.ISupportInitialize)dgvCommandes).EndInit();
@@ -172,7 +201,10 @@ partial class AfficherCommandeForm
     
 
 
+    private System.Windows.Forms.Button btnModifier;
+    private System.Windows.Forms.Button btnSupprimer;
     private System.Windows.Forms.Button btnAjouter;
+    
 
     private System.Windows.Forms.DataGridViewTextBoxColumn txtId;
     private System.Windows.Forms.DataGridViewTextBoxColumn txtNomMenu;

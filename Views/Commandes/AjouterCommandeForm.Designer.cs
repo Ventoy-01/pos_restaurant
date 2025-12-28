@@ -1,4 +1,7 @@
 using System.ComponentModel;
+using Pos_Restaurant.Dao;
+using Pos_Restaurant.Models;
+using Pos_Restaurant.Dao;
 
 namespace Pos_Restaurant.Views.Commandes;
 
@@ -13,9 +16,13 @@ partial class AjouterCommandeForm
     /// Clean up any resources being used.
     /// </summary>
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
+   
+    private MenusDao menusDao = new MenusDao();
+
+    private List<MenusModel> menus = new MenusDao().Lister();
+    List<ClientsModel> clients = new ClientsDao().Lister();
     
-    // private System.ComponentModel.IContainer components = null;
-        
     // Déclaration des contrôles
     private System.Windows.Forms.Label lblTitre;
     private System.Windows.Forms.Label lblMenu;
@@ -104,7 +111,11 @@ partial class AjouterCommandeForm
         
         //comboMenus
         comboMenu.FormattingEnabled = true;
-        comboMenu.Items.AddRange(new object[] { 1, 2 });
+        // comboMenu.Items.AddRange(new object[] { 1, 2 });
+        foreach (var menu in menus)
+        {
+            comboMenu.Items.AddRange($"{menu.Id} - {menu.Nom}");
+        }
         comboMenu.Location = new System.Drawing.Point(250, 90);
         comboMenu.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
         comboMenu.Name = "comboMenu";
@@ -123,7 +134,12 @@ partial class AjouterCommandeForm
         // 
         //comboClient
         comboClient.FormattingEnabled = true;
-        comboClient.Items.AddRange(new object[] {1,7});
+        // comboClient.Items.AddRange(new object[] {1,7});
+        foreach (var client in clients)
+        {
+            comboClient.Items.AddRange($"{client.Id} - {client.Nom}");
+        }
+        
         comboClient.Location = new System.Drawing.Point(250, 190);
         comboClient.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
         comboClient.Name = "comboClient";

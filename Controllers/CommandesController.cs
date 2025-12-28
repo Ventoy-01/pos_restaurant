@@ -45,6 +45,37 @@ public class CommandesController
         }
     }
 
+    public bool ModifierCommande(CommandesModel commande)
+    {
+        try
+        {
+            commandesDao = new CommandesDao();
+            int result = commandesDao.Modifier(commande);
+            return result > 0;
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+    
+    public bool SupprimerCommande(int commandeId)
+    {
+        try
+        {
+            int result = commandesDao.Supprimer(commandeId.ToString());
+            return result > 0;
+    
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Erreur dans CommandesController.Supprimer: {e.Message}");
+            throw;
+        }
+    }
+    
     public List<CommandesModel> ListerCommandes()
     {
         List<CommandesModel> commandes = new List<CommandesModel>();
