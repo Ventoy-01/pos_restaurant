@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "9ZuhrBOhzz4=",
+  "dgSpecHash": "rgNhxQJQLtQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ing. Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj",
+  "projectFilePath": "C:\\Users\\US LAPTOP\\Documents\\ProjetC#\\Pos_Restaurant.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ing. Jonas\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
-    "C:\\Users\\Ing. Jonas\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
-    "C:\\Users\\Ing. Jonas\\.nuget\\packages\\mysqlconnector\\2.5.0\\mysqlconnector.2.5.0.nupkg.sha512"
+    "C:\\Users\\US LAPTOP\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\US LAPTOP\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\US LAPTOP\\.nuget\\packages\\mysqlconnector\\2.5.0\\mysqlconnector.2.5.0.nupkg.sha512"
   ],
   "logs": []
 }

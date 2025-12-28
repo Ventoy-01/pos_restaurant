@@ -8,7 +8,7 @@ namespace Pos_Restaurant.Views.Paiements
     public partial class AjouterPaiementForm : Form
     {
         private PaiementsController controller;
-        private CommandesController commandesController;
+        // priva te CommandesController commandesController;
         
         public AjouterPaiementForm()
         {
@@ -24,7 +24,7 @@ namespace Pos_Restaurant.Views.Paiements
             
             
             // Initialiser le montant à 0
-            txtMontant.PlaceholderText = "0.00";
+            txtMontant.Text = "0.00";
             
             // Initialiser le mode de paiement par défaut
             comboModePaiement.SelectedIndex = 0;
@@ -39,12 +39,18 @@ namespace Pos_Restaurant.Views.Paiements
                 // Exemple : Récupérer les commandes non payées
                 comboIdCommande.Items.Clear();
                 
-               List <CommandesModel> commandes = commandesController.ListerCommandes();
-                foreach (var commande in commandes)
+               // List <CommandesModel> commandes = commandesController.ListerCommandes();
+               // foreach (var commande in commandes)
                {
-                     comboIdCommande.Items.Add($"{commande.Id} - {commande.IdClient} ");
+                     // comboIdCommande.Items.Add($"{commande.Id} - {commande.IdClient} - {commande.Statut}");
                    
                }
+               
+                // // Simulation de données
+                // comboIdCommande.Items.Add("1 - Table 1 - 2500 HTG");
+                // comboIdCommande.Items.Add("2 - Table 3 - 1800 HTG");
+                // comboIdCommande.Items.Add("3 - Table 5 - 3200 HTG");
+                // comboIdCommande.Items.Add("4 - Livraison - 1500 HTG");
                 
                 if (comboIdCommande.Items.Count > 0)
                 {

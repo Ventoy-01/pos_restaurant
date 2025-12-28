@@ -15,7 +15,6 @@ namespace Pos_Restaurant.Dao
     {
         private MySqlConnection conn = null;
         private MySqlCommand cmd = null;
-        private MySqlDataReader dr = null;
         
         public MenusDao()
         {
@@ -148,6 +147,7 @@ namespace Pos_Restaurant.Dao
         public MenusModel Rechercher(String val)
         {
             int id = int.Parse(val);
+            MySqlDataReader dr = null;
             
             try
             {
@@ -201,6 +201,7 @@ namespace Pos_Restaurant.Dao
         public List<MenusModel> Lister()
         {
             List<MenusModel> menus = new List<MenusModel>();
+            MySqlDataReader dr = null;
             
             try
             {
@@ -250,9 +251,110 @@ namespace Pos_Restaurant.Dao
         }
         
         
+        public List<MenusModel> RechercherParNom(string nom)
+        {
+            List<MenusModel> menus = new List<MenusModel>();
+            MySqlDataReader dr = null;
+            
+            try
+            {
+                conn = DbConnection.GetConnection();
+                
+                if (conn.State != System.Data.ConnectionState.Open)
+                    conn.Open();
+                
+                string req = "SELECT * FROM menus WHERE nom LIKE @nom AND actif = 1";
+                
+                using (cmd = new MySqlCommand(req, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nom", "%" + nom + "%");
+                    
+                    dr = cmd.ExecuteReader();
+                    
+                    while (dr.Read())
+                    {
+                        menus.Add(new MenusModel
+                        {
+                            Id = dr.GetInt32("id"),
+                            Type = dr.GetString("type"),
+                            Nom = dr.GetString("nom"),
+                            Quantite = dr.GetInt32("quantite"),
+                            PrixUnitaire = dr.GetDouble("prix_unitaire"),
+                            Description = dr.GetString("description")
+                        });
+                    }
+                    
+                    return menus;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erreur recherche par nom: {ex.Message}", ex);
+            }
+            finally
+            {
+                if (dr != null && !dr.IsClosed)
+                    dr.Close();
+                    
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                    conn.Close();
+            }
+        }
+        
+        public List<MenusModel> RechercherParType(string type)
+        {
+            List<MenusModel> menus = new List<MenusModel>();
+            MySqlDataReader dr = null;
+            
+            try
+            {
+                conn = DbConnection.GetConnection();
+                
+                if (conn.State != System.Data.ConnectionState.Open)
+                    conn.Open();
+                
+                string req = "SELECT * FROM menus WHERE type = @type AND actif = 1";
+                
+                using (cmd = new MySqlCommand(req, conn))
+                {
+                    cmd.Parameters.AddWithValue("@type", type);
+                    
+                    dr = cmd.ExecuteReader();
+                    
+                    while (dr.Read())
+                    {
+                        menus.Add(new MenusModel
+                        {
+                            Id = dr.GetInt32("id"),
+                            Type = dr.GetString("type"),
+                            Nom = dr.GetString("nom"),
+                            Quantite = dr.GetInt32("quantite"),
+                            PrixUnitaire = dr.GetDouble("prix_unitaire"),
+                            Description = dr.GetString("description")
+                        });
+                    }
+                    
+                    return menus;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erreur recherche par type: {ex.Message}", ex);
+            }
+            finally
+            {
+                if (dr != null && !dr.IsClosed)
+                    dr.Close();
+                    
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                    conn.Close();
+            }
+        }
+        
         public List<MenusModel> ListerDisponibles()
         {
             List<MenusModel> menus = new List<MenusModel>();
+            MySqlDataReader dr = null;
             
             try
             {
