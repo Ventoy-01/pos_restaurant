@@ -6,6 +6,7 @@ using Pos_Restaurant.Models;
 public partial class AjouterCommandeForm : Form
 {
     private CommandesController controller;
+    
     public AjouterCommandeForm()
     {
         controller = new CommandesController();
@@ -21,10 +22,8 @@ public partial class AjouterCommandeForm : Form
             // 2. Créer l'objet Model à partir des contrôles UI
             CommandesModel nouvelleCommande = new CommandesModel()
             { 
-            // IdMenu  = (int)comboMenu.ValueMember,
-            // IdClient = (int)comboClient.ValueMember,
-            IdMenu  = 1,
-            IdClient = 1,
+            IdMenu  =  ExtraireIdCommande(comboMenu),
+            IdClient = ExtraireIdCommande(comboClient),
             Quantite = (int)txtQuantite.Value,
             PrixTotal = (double)txtPrixTotal.Value,
             Description = txtDescription.Text,
@@ -41,7 +40,7 @@ public partial class AjouterCommandeForm : Form
             // 5. Gérer la réponse
             if (succes)
             {
-                AfficherMessage($"Commande Menu'{nouvelleCommande.IdMenu}' pour '{nouvelleCommande.IdClient}' enregistré avec succès!", 
+                AfficherMessage($"Commande Menu '{nouvelleCommande.IdMenu}' pour '{nouvelleCommande.IdClient}' enregistré avec succès!", 
                                  Color.Green);
                 // ViderFormulaire();
             }
@@ -64,7 +63,22 @@ public partial class AjouterCommandeForm : Form
         }
     }
 
-    
+    private int ExtraireIdCommande(ComboBox combo)
+    {
+        // Extraire l'ID de commande du texte sélectionné
+        // Format attendu : "ID - Description - Montant"
+        if (combo.SelectedItem != null)
+        {
+            string texte = combo.SelectedItem.ToString();
+            if (texte.Contains("-"))
+            {
+                string idPart = texte.Split('-')[0].Trim();
+                if (int.TryParse(idPart, out int id))
+                    return id;
+            }
+        }
+        return 0;
+    }
  
     
    

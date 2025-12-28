@@ -94,7 +94,7 @@
             comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboType.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)0));
             comboType.FormattingEnabled = true;
-            comboType.Items.AddRange(new object[] { "Plat", "Dessert", "Boisson"});
+            comboType.Items.AddRange(new object[] { "Plat", "Dessert", "Boisson", "Entrée" });
             comboType.Location = new System.Drawing.Point(250, 147);
             comboType.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             comboType.Name = "comboType";

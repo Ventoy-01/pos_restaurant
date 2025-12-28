@@ -1,6 +1,6 @@
 
 
-// using MySql.Data.MySqlClient;
+
 using MySqlConnector;
 using System;
 
@@ -8,7 +8,7 @@ namespace Pos_Restaurant.Data
 {
     public class DbConnection
     {
-        public static string connectionString = "Server=127.0.0.1;Port=3306;Database=pos;Uid=root;Pwd=;";
+        public static string connectionString = "Server=127.0.0.1;Port=3306;Database=pos;Uid=root;Pwd=vinchysql;";
         public static MySqlConnection GetConnection()
         {
             return new MySqlConnection(connectionString);

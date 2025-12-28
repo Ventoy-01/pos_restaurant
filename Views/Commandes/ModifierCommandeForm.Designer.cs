@@ -1,11 +1,10 @@
 using System.ComponentModel;
-using Pos_Restaurant.Dao;
 using Pos_Restaurant.Models;
 using Pos_Restaurant.Dao;
 
 namespace Pos_Restaurant.Views.Commandes;
 
-partial class AjouterCommandeForm
+partial class ModifierCommandeForm
 {
     /// <summary>
     /// Required designer variable.
@@ -17,8 +16,7 @@ partial class AjouterCommandeForm
     /// </summary>
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
 
-   
-    private MenusDao menusDao = new MenusDao();
+
 
     private List<MenusModel> menus = new MenusDao().Lister();
     List<ClientsModel> clients = new ClientsDao().Lister();
@@ -42,8 +40,8 @@ partial class AjouterCommandeForm
     // private System.Windows.Forms.Label lblMontantDette;
     // private System.Windows.Forms.NumericUpDown txtMontantDette;
     private System.Windows.Forms.Button btnEnregistrer;
-    private System.Windows.Forms.Button btnVider;
-    private System.Windows.Forms.Label lblMessage;
+    // private System.Windows.Forms.Button btnVider;
+    // private System.Windows.Forms.Label lblMessage;
     
     protected override void Dispose(bool disposing)
     {
@@ -64,6 +62,7 @@ partial class AjouterCommandeForm
     private void InitializeComponent()
     {
         
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModifierCommandeForm));
         lblTitre = new System.Windows.Forms.Label();
         lblMenu = new System.Windows.Forms.Label();
         // txtNom = new System.Windows.Forms.TextBox();
@@ -81,8 +80,8 @@ partial class AjouterCommandeForm
         // lblMontantDette = new System.Windows.Forms.Label();
         // txtMontantDette = new System.Windows.Forms.NumericUpDown();
         btnEnregistrer = new System.Windows.Forms.Button();
-        btnVider = new System.Windows.Forms.Button();
-        lblMessage = new System.Windows.Forms.Label();
+        // btnVider = new System.Windows.Forms.Button();
+        // lblMessage = new System.Windows.Forms.Label();
         ((System.ComponentModel.ISupportInitialize)txtPrixTotal).BeginInit();
         SuspendLayout();
         // 
@@ -96,7 +95,7 @@ partial class AjouterCommandeForm
         lblTitre.Name = "lblTitre";
         lblTitre.Size = new System.Drawing.Size(263, 33);
         lblTitre.TabIndex = 0;
-        lblTitre.Text = "NOUVELLE COMMANDE";
+        lblTitre.Text = "MODIFIER COMMANDE";
         // 
         // lblMenu
         // 
@@ -134,7 +133,7 @@ partial class AjouterCommandeForm
         // 
         //comboClient
         comboClient.FormattingEnabled = true;
-        // comboClient.Items.AddRange(new object[] {1,7});
+    
         foreach (var client in clients)
         {
             comboClient.Items.AddRange($"{client.Id} - {client.Nom}");
@@ -216,30 +215,7 @@ partial class AjouterCommandeForm
         btnEnregistrer.Text = "ENREGISTRER";
         btnEnregistrer.UseVisualStyleBackColor = false;
         btnEnregistrer.Click += btnEnregistrer_Click;
-        // 
-        // btnVider
-        // 
-        btnVider.BackColor = System.Drawing.Color.FromArgb(((int)((byte)255)), ((int)((byte)128)), ((int)((byte)128)));
-        btnVider.Location = new System.Drawing.Point(467, 530);
-        btnVider.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-        btnVider.Name = "btnVider";
-        btnVider.Size = new System.Drawing.Size(200, 67);
-        btnVider.TabIndex = 14;
-        btnVider.Text = "VIDER";
-        btnVider.UseVisualStyleBackColor = false;
-        btnVider.Click += btnVider_Click;
-        // 
-        // lblMessage
-        // 
-        lblMessage.BackColor = System.Drawing.Color.Honeydew;
-        lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-        lblMessage.Location = new System.Drawing.Point(50, 610);
-        lblMessage.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-        lblMessage.Name = "lblMessage";
-        lblMessage.Size = new System.Drawing.Size(615, 75);
-        lblMessage.TabIndex = 15;
-        lblMessage.Text = "Prêt à enregistrer...";
-        lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      
             
         this.components = new System.ComponentModel.Container();
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -250,12 +226,11 @@ partial class AjouterCommandeForm
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(723, 694);
         
-        Controls.Add(lblMessage);
+   
         Controls.Add(lblClient);
-        Controls.Add(btnVider);
+        // Controls.Add(btnVider);
         Controls.Add(btnEnregistrer);
-        // Controls.Add(txtMontantDette);
-        // Controls.Add(lblMontantDette);
+     
         Controls.Add(txtPrixTotal);
         Controls.Add(lblPrixTotal);
         Controls.Add(txtQuantite);
