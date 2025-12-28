@@ -130,7 +130,7 @@ public class PaiementsDao : IDao<PaiementsModel>
                     {
                         Id = dr.GetInt32("Id"),
                         IdCommande = dr.GetInt32("IdCommande"),
-                        Montant = dr.GetInt32("Montant"),
+                        Montant = dr.GetDouble("Montant"),
                         DatePaiement = dr.GetDateTime("DatePaiement"),
                         ModePaiement = dr.GetString("ModePaiement"),
                     });

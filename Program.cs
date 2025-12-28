@@ -1,4 +1,5 @@
 
+using Pos_Restaurant.Views;
 using Pos_Restaurant.Views.Users;
 
 namespace Pos_Restaurant;
@@ -22,8 +23,9 @@ static class Program
         ApplicationConfiguration.Initialize();
         // Application.Run(new Login());
         // Application.Run(new AfficherPaiementForm());
-        Application.Run(new AfficherPaiementForm());
-        // Application.Run(new MainForm());
+        // Application.Run(new AfficherUserForm());
+        // Application.Run(new ParametreForm());
+        Application.Run(new MainForm());
     }
 }
 

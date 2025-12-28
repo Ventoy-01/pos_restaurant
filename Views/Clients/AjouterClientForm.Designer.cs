@@ -120,12 +120,13 @@ namespace Pos_Restaurant.Views.Clients
             // comboSexe
             // 
             comboSexe.FormattingEnabled = true;
-            comboSexe.Items.AddRange(new object[] { "Masculin", "Féminin" });
+            comboSexe.Items.AddRange(new object[] { "Masculin", "Feminin" });
             comboSexe.Location = new System.Drawing.Point(250, 225);
             comboSexe.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             comboSexe.Name = "comboSexe";
             comboSexe.Size = new System.Drawing.Size(414, 33);
             comboSexe.TabIndex = 6;
+            comboSexe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             // 
             // lblTelephone
             // 
@@ -144,6 +145,7 @@ namespace Pos_Restaurant.Views.Clients
             txtTelephone.Name = "txtTelephone";
             txtTelephone.Size = new System.Drawing.Size(414, 31);
             txtTelephone.TabIndex = 8;
+            txtTelephone.MaxLength = 8;
             // 
             // lblEmail
             // 

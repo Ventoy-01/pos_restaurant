@@ -105,6 +105,7 @@ namespace Pos_Restaurant.Views.Menus
             comboType.Name = "comboType";
             comboType.Size = new System.Drawing.Size(414, 33);
             comboType.TabIndex = 4;
+            comboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             // 
             // lblPrix
             // 
