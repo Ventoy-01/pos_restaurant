@@ -87,18 +87,6 @@ namespace Pos_Restaurant.Controllers
             }
         }
         
-        public MenusModel ObtenirMenuParId(int menuId)
-        {
-            try
-            {
-                return menusDao.Rechercher(menuId.ToString());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Erreur dans MenusController.ObtenirMenuParId: {e.Message}");
-                throw;
-            }
-        }
 
         public bool ModifierMenu(MenusModel menu)
         {

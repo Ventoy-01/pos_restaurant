@@ -387,7 +387,7 @@ namespace Pos_Restaurant
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POS Restaurant - Dashboard";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            // this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.panelSidebar.ResumeLayout(false);
             this.panelUserInfo.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);

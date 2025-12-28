@@ -14,7 +14,7 @@ namespace Pos_Restaurant.Views.Paiements
         {
             InitializeComponent();
             controller = new PaiementsController();
-            // ChargerPaiements();
+            ChargerPaiements();
         }
 
         private void ChargerPaiements()

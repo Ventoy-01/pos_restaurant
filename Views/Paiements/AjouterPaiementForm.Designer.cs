@@ -178,7 +178,7 @@
             btnVider.TabIndex = 6;
             btnVider.Text = "VIDER";
             btnVider.UseVisualStyleBackColor = false;
-            // btnVider.Click += btnVider_Click;
+            btnVider.Click += btnVider_Click;
             // 
             // lblMessage
             // 

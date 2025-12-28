@@ -1,4 +1,6 @@
-﻿namespace Pos_Restaurant.Views.Users;
+﻿using System.Runtime.CompilerServices;
+
+namespace Pos_Restaurant.Views.Users;
 
 using Pos_Restaurant.Models;
 
@@ -14,18 +16,10 @@ public static class SessionUtilisateur
             return EstConnecte && UtilisateurCourant.Role == role;
         }
         
-        // public static bool ALeDroit(params string[] roles)
-        // {
-        //     if (!EstConnecte) return false;
-        //     
-        //     foreach (var role in roles)
-        //     {
-        //         if (UtilisateurCourant.Role == role)
-        //             return true;
-        //     }
-        //     
-        //     return false;
-        // }
+        public static bool IsAdmin()
+        {
+            return (EstConnecte && UtilisateurCourant.Role == "admin");
+        }
         
         public static void Deconnecter()
         {

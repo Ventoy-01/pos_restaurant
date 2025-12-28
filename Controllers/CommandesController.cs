@@ -44,5 +44,21 @@ public class CommandesController
             throw; // Relance l'exception pour que le formulaire puisse l'attraper
         }
     }
+
+    public List<CommandesModel> ListerCommandes()
+    {
+        List<CommandesModel> commandes = new List<CommandesModel>();
+        try
+        {
+
+            commandes = commandesDao.Lister();
+            return commandes;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
     
 }

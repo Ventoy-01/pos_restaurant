@@ -31,7 +31,7 @@ public class UsersDao : IDao<UsersModel>
             
             string req = @"INSERT INTO users (Username, Password, Role) 
                                VALUES (@Username, @Password, @Role)";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 // Ajouter les paramètres
                 cmd.Parameters.AddWithValue("@Username",u.Username);
@@ -71,7 +71,7 @@ public class UsersDao : IDao<UsersModel>
             conn.Open();
             
             string req = @"UPDATE users SET Username=@Username, Password=@Password, Role=@Role WHERE Id=@Id";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 // Ajouter les paramètres
                 cmd.Parameters.AddWithValue("@Username", e.Username);
@@ -112,7 +112,7 @@ public class UsersDao : IDao<UsersModel>
             conn.Open();
             
             string req = @"DELETE FROM users WHERE Id=@Id";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 // Ajouter les paramètres
                 cmd.Parameters.AddWithValue("@Id", id);
@@ -150,7 +150,7 @@ public class UsersDao : IDao<UsersModel>
             conn.Open();
             
             string req = @"SELECT * FROM users WHERE Id=@Id";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 // Ajouter les paramètres
                 cmd.Parameters.AddWithValue("@Id", id);
@@ -205,7 +205,7 @@ public class UsersDao : IDao<UsersModel>
 
             string req = "SELECT * FROM users";
             
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 dr = cmd.ExecuteReader();
                
@@ -248,7 +248,7 @@ public class UsersDao : IDao<UsersModel>
             conn = DbConnection.GetConnection();
             conn.Open();
             string req = @"SELECT * FROM users WHERE Username=@Username AND Password=@Password";
-            using (MySqlCommand cmd = new MySqlCommand(req, conn))
+            using ( cmd = new MySqlCommand(req, conn))
             {
                 cmd.Parameters.AddWithValue("@Username", user);
                 cmd.Parameters.AddWithValue("@Password", pwd);
