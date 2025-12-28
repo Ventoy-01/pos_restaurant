@@ -2,6 +2,7 @@
 
 using Pos_Restaurant.Models;
 using Pos_Restaurant.Controllers;
+
 public partial class AjouterClientForm : Form
 {
     private ClientsController controller;

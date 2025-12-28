@@ -1,3 +1,5 @@
+using Pos_Restaurant.Views.Commandes;
+
 namespace Pos_Restaurant;
 
 using Pos_Restaurant.Models;
@@ -16,7 +18,7 @@ static class Program
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new AfficherClientForm());
+        Application.Run(new AfficherCommandeForm());
         // Application.Run(new MainForm());
     }
 }

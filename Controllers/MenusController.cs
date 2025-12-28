@@ -57,6 +57,7 @@ namespace Pos_Restaurant.Controllers
                 throw; // Relance l'exception pour que le formulaire puisse l'attraper
             }
         }
+        
         public List<MenusModel> ListerMenus()
         {
             try

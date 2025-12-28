@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net8.0-windows</TargetFramework>
+        <TargetFramework>net10.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -27,6 +27,12 @@
       <Compile Update="Views\Clients\AfficherClientForm.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Views\Commandes\AfficherCommandeForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\Commandes\AjouterCommandeForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -37,6 +43,11 @@
 
     <ItemGroup>
       <PackageReference Include="MySqlConnector" Version="2.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Paiements\" />
+      <Folder Include="Views\Users\" />
     </ItemGroup>
 
 </Project>
