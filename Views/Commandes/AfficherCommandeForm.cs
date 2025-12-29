@@ -36,6 +36,38 @@ public partial class AfficherCommandeForm : Form
         
         Console.WriteLine($"il y a {controller.ListerCommandes().Count} commandes");
     }
+    
+    private void txtRechercher_TextChanged(object sender, EventArgs e)
+    {
+        string critere = txtRechercher.Text.Trim();
+    
+        if (string.IsNullOrWhiteSpace(critere))
+        {
+            ChargerCommandes();
+            lblNombreResultats.Text = "";
+            return;
+        }
+    
+        try
+        {
+            var commandes = controller.ListerCommandes()
+                .Where(c => 
+                    (c.Id.ToString() ?? "").Contains(critere) ||
+                    (c.IdMenu.ToString() ?? "").Contains(critere) ||
+                    (c.IdClient.ToString() ?? "").Contains(critere) ||
+                    (c.Description ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+            
+            dgvCommandes.DataSource = commandes;
+            lblNombreResultats.Text = $"{commandes.Count} menu(s) trouvé(s)";
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Erreur lors de la recherche : {ex.Message}", "Erreur", 
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
 
     private void btnModifier_Click(object sender, EventArgs e)
     {

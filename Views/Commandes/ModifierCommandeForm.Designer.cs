@@ -144,8 +144,6 @@ partial class ModifierCommandeForm
         comboClient.Name = "comboClient";
         comboClient.Size = new System.Drawing.Size(414, 33);
         comboClient.TabIndex = 6;
-       
-        
         // 
         // lblQuantite
         // 

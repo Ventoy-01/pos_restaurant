@@ -152,8 +152,7 @@ namespace Pos_Restaurant.Views.Paiements
             List<CommandesModel> commandes = commandesController.ListerCommandes();
             int idCommande = ExtraireIdCommande();
 
-            // return commandes.FirstOrDefault(c => c.Id == idCommande)?.PrixTotal ?? 0.0;
-            return 5;
+            return commandes.FirstOrDefault(c => c.Id == idCommande)?.PrixTotal ?? 0.0;
         }
         private void txtMontant_TextChanged(object sender, EventArgs e)
         {

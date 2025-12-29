@@ -53,8 +53,10 @@
             dgvPaiements.ReadOnly = true;
             dgvPaiements.RowHeadersWidth = 62;
             dgvPaiements.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            dgvPaiements.Size = new System.Drawing.Size(940, 350);
+            dgvPaiements.Size = new System.Drawing.Size(943, 350);
             dgvPaiements.TabIndex = 0;
+            dgvPaiements.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             // 
             // txtId
             // 

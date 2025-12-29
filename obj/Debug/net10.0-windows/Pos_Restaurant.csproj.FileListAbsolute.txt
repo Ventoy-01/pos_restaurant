@@ -73,3 +73,27 @@ C:\Users\US LAPTOP\Documents\ProjetC#\obj\Debug\net10.0-windows\refint\Pos_Resta
 C:\Users\US LAPTOP\Documents\ProjetC#\obj\Debug\net10.0-windows\Pos_Restaurant.pdb
 C:\Users\US LAPTOP\Documents\ProjetC#\obj\Debug\net10.0-windows\Pos_Restaurant.genruntimeconfig.cache
 C:\Users\US LAPTOP\Documents\ProjetC#\obj\Debug\net10.0-windows\ref\Pos_Restaurant.dll
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\Pos_Restaurant.exe
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\Pos_Restaurant.deps.json
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\Pos_Restaurant.runtimeconfig.json
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\Pos_Restaurant.dll
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\Pos_Restaurant.pdb
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\MySqlConnector.dll
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\bin\Debug\net10.0-windows\MySql.Data.dll
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.csproj.AssemblyReference.cache
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.Views.Menus.AjouterMenuForm.resources
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.Views.Users.Login.resources
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.csproj.GenerateResource.cache
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.AssemblyInfoInputs.cache
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.AssemblyInfo.cs
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.csproj.CoreCompileInputs.cache
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.sourcelink.json
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Rest.D6E2E8C7.Up2Date
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.dll
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\refint\Pos_Restaurant.dll
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.pdb
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\Pos_Restaurant.genruntimeconfig.cache
+C:\Users\Jonas\RiderProjects\Projet_final_C#\Pos_Restaurant\obj\Debug\net10.0-windows\ref\Pos_Restaurant.dll

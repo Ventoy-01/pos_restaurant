@@ -119,7 +119,7 @@ namespace Pos_Restaurant
             var statsPanel = new FlowLayoutPanel
             {
                 Dock = DockStyle.Top,
-                Height = 150,
+                Height = 200,
                 FlowDirection = FlowDirection.LeftToRight,
                 WrapContents = false,
                 AutoScroll = true
@@ -158,70 +158,44 @@ namespace Pos_Restaurant
 
         private Panel CreerCarteStatistique(string icon, string title, string value, Color color)
         {
-            var panel = new Panel
+            var panel = new FlowLayoutPanel // Changement ici
             {
-                Size = new Size(200, 120),
+                Size = new Size(200, 180), // Augmenté un peu pour la sécurité
                 BackColor = Color.White,
-                BorderStyle = BorderStyle.None,
-                Margin = new Padding(10),
-                Padding = new Padding(15)
+                FlowDirection = FlowDirection.TopDown, // Aligne de haut en bas
+                WrapContents = false,
+                Padding = new Padding(15),
+                Margin = new Padding(10)
             };
 
-            // Coin arrondi
-            panel.Paint += (s, e) =>
-            {
-                using (GraphicsPath path = new GraphicsPath())
-                {
-                    int radius = 10;
-                    Rectangle rect = panel.ClientRectangle;
-                    
-                    path.AddArc(rect.X, rect.Y, radius, radius, 180, 90);
-                    path.AddArc(rect.Right - radius, rect.Y, radius, radius, 270, 90);
-                    path.AddArc(rect.Right - radius, rect.Bottom - radius, radius, radius, 0, 90);
-                    path.AddArc(rect.X, rect.Bottom - radius, radius, radius, 90, 90);
-                    path.CloseFigure();
-                    
-                    panel.Region = new Region(path);
-                    
-                    using (Pen pen = new Pen(Color.FromArgb(230, 230, 230), 1))
-                    {
-                        e.Graphics.DrawPath(pen, path);
-                    }
-                }
-            };
+            // Gardez votre code de coin arrondi (panel.Paint += ...) ici
 
-            var lblIcon = new Label
-            {
+            var lblIcon = new Label {
                 Text = icon,
-                Font = new Font("Segoe UI Emoji", 24),
-                Location = new Point(15, 15),
-                AutoSize = true
+                Font = new Font("Segoe UI Emoji", 20),
+                AutoSize = true,
+                Margin = new Padding(0, 0, 0, 5) // Marge basse pour l'espace
             };
 
-            var lblTitle = new Label
-            {
+            var lblTitle = new Label {
                 Text = title,
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 ForeColor = Color.Gray,
-                Location = new Point(15, 60),
-                AutoSize = true
+                AutoSize = true,
+                Margin = new Padding(0, 0, 0, 2)
             };
 
-            var lblValue = new Label
-            {
+            var lblValue = new Label {
                 Text = value,
-                Font = new Font("Segoe UI", 18, FontStyle.Bold),
+                Font = new Font("Segoe UI", 12, FontStyle.Regular),
                 ForeColor = color,
-                Location = new Point(15, 80),
                 AutoSize = true
             };
 
-            panel.Controls.Add(lblIcon);
-            panel.Controls.Add(lblTitle);
-            panel.Controls.Add(lblValue);
-
+            panel.Controls.AddRange(new Control[] { lblIcon, lblTitle, lblValue });
             return panel;
         }
+
 
         private void OuvrirFormDansPanel(Form form)
         {

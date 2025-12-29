@@ -54,6 +54,7 @@
             dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             dgvUsers.Size = new System.Drawing.Size(920, 380);
             dgvUsers.TabIndex = 0;
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             // 
             // colId
             // 
@@ -124,7 +125,7 @@
             btnSupprimer.ForeColor = System.Drawing.Color.White;
             btnSupprimer.Location = new System.Drawing.Point(470, 70);
             btnSupprimer.Name = "btnSupprimer";
-            btnSupprimer.Size = new System.Drawing.Size(150, 41);
+            btnSupprimer.Size = new System.Drawing.Size(160, 41);
             btnSupprimer.TabIndex = 2;
             btnSupprimer.Text = "🗑️ Supprimer";
             btnSupprimer.UseVisualStyleBackColor = false;

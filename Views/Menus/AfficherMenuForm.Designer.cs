@@ -56,6 +56,7 @@
             dgvMenus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             dgvMenus.Size = new System.Drawing.Size(943, 328);
             dgvMenus.TabIndex = 0;
+            dgvMenus.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             // 
             // txtId
             // 
