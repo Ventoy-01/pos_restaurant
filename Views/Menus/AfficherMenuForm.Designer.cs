@@ -120,7 +120,7 @@
             btnAjouter.Name = "btnAjouter";
             btnAjouter.Size = new System.Drawing.Size(155, 41);
             btnAjouter.TabIndex = 4;
-            btnAjouter.Text = "Ajouter";
+            btnAjouter.Text = "➕ Ajouter";
             btnAjouter.UseVisualStyleBackColor = false;
             btnAjouter.Click += btnAjouter_Click;
             // 
@@ -133,7 +133,7 @@
             btnModifier.Name = "btnModifier";
             btnModifier.Size = new System.Drawing.Size(155, 41);
             btnModifier.TabIndex = 3;
-            btnModifier.Text = "Modifier";
+            btnModifier.Text = "✏️ Modifier";
             btnModifier.UseVisualStyleBackColor = false;
             btnModifier.Click += btnModifier_Click;
             // 
@@ -146,7 +146,7 @@
             btnSupprimer.Name = "btnSupprimer";
             btnSupprimer.Size = new System.Drawing.Size(155, 41);
             btnSupprimer.TabIndex = 2;
-            btnSupprimer.Text = "Supprimer";
+            btnSupprimer.Text = "🗑️ Supprimer";
             btnSupprimer.UseVisualStyleBackColor = false;
             btnSupprimer.Click += btnSupprimer_Click;
             // 

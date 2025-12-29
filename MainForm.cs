@@ -2,7 +2,9 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using Pos_Restaurant.Views;
 using Pos_Restaurant.Views.Clients;
+using Pos_Restaurant.Views.Commandes;
 using Pos_Restaurant.Views.Menus;
 using Pos_Restaurant.Views.Paiements;
 using Pos_Restaurant.Views.Users;
@@ -275,8 +277,7 @@ namespace Pos_Restaurant
         {
             ActiverBouton((Button)sender);
             lblTitle.Text = "📋 COMMANDES";
-            MessageBox.Show("Module Commandes à implémenter", "Information", 
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            OuvrirFormDansPanel(new AfficherCommandeForm());
         }
 
         private void btnPaiements_Click(object sender, EventArgs e)
@@ -290,16 +291,13 @@ namespace Pos_Restaurant
         {
             ActiverBouton((Button)sender);
             lblTitle.Text = "👤 UTILISATEURS";
-            MessageBox.Show("Module Utilisateurs à implémenter", "Information", 
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            OuvrirFormDansPanel(new AfficherUserForm());
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
             ActiverBouton((Button)sender);
-            lblTitle.Text = "⚙️ PARAMÈTRES";
-            MessageBox.Show("Module Paramètres à implémenter", "Information", 
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            OuvrirFormDansPanel(new ParametreForm());
         }
 
         private void btnDeconnecter_Click(object sender, EventArgs e)

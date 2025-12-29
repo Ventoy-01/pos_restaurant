@@ -45,12 +45,11 @@ namespace Pos_Restaurant.Views.Paiements
                List<PaiementsModel> paiements = controller.ListerPaiement();
                
                 // Récupérer les commandes non payées
-               List<CommandesModel> commandesSansPaiement = (
-                   from cmd in commandes
-                   join pmt in paiements on cmd.Id equals pmt.IdCommande into groupePaiements
-                   where groupePaiements.Count() == 0
-                   select cmd
-               ).ToList();
+
+               List<CommandesModel> commandesSansPaiement = commandes
+                   .Where(cmd => !paiements.Any(pmt => pmt.IdCommande == cmd.Id))
+                   .ToList();
+
                
                foreach (var commande in commandesSansPaiement)
                {
@@ -70,22 +69,29 @@ namespace Pos_Restaurant.Views.Paiements
 
         private void btnEnregistrer_Click(object sender, EventArgs e)
         {
-        
+
             try
             {
                 if (!double.TryParse(txtMontant.Text, out double montant) || montant <= 0)
                 {
-                    AfficherMessage("Veuillez saisir un montant valide supérieur à 0.", "Erreur", 
+                    AfficherMessage("Veuillez saisir un montant valide supérieur à 0.", "Erreur",
                         MessageBoxIcon.Error);
-                    return; 
+                    return;
                 }
 
                 if (dtpDatePaiement.Value > DateTime.Now)
                 {
-                    AfficherMessage("La date de paiement ne peut pas être dans le futur.", "Date invalide",  MessageBoxIcon.Warning);
+                    AfficherMessage("La date de paiement ne peut pas être dans le futur.", "Date invalide",
+                        MessageBoxIcon.Warning);
                     dtpDatePaiement.Value = DateTime.Now;
                 }
-                // Créer l'objet paiement
+
+                if(comboIdCommande.Items.Count <= 0){
+                    AfficherMessage("Id commande incorrect", "Erreur", MessageBoxIcon.Error);
+                    return;
+                }
+
+            // Créer l'objet paiement
                 var paiement = new PaiementsModel
                 {
                     IdCommande = ExtraireIdCommande(),
@@ -128,7 +134,6 @@ namespace Pos_Restaurant.Views.Paiements
         //
         private int ExtraireIdCommande()
         {
-
             if (comboIdCommande.SelectedItem != null)
             {
                 string texte = comboIdCommande.SelectedItem.ToString();
@@ -139,8 +144,7 @@ namespace Pos_Restaurant.Views.Paiements
                         return id;
                 }
             }
-            // return 0;
-            return 1;
+            return 0;
         }
 
         private Double ExtrairePrixTotalCommande()

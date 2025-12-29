@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net10.0-windows</TargetFramework>
+        <TargetFramework>net8.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -42,9 +42,21 @@
       <Compile Update="Views\Users\Login.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Views\Users\AfficherUserForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\Users\AjouterUserForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\Users\ModifierUserForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="Views\Parametres\ParametreForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
-
-    <ItemGroup>
+	
+	<ItemGroup>
       <Reference Include="MySql.Data">
         <HintPath>..\..\..\..\..\Program Files (x86)\MySQL\MySQL Installer for Windows\MySql.Data.dll</HintPath>
       </Reference>

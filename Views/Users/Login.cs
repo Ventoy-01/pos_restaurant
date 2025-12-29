@@ -81,18 +81,6 @@ using Pos_Restaurant.Models;
                 "Mot de passe oublié",  MessageBoxIcon.Information);
         }
 
-        // private void txtUsername_Enter(object sender, EventArgs e)
-        // {
-        //     // Effet visuel quand le TextBox obtient le focus
-        //     txtUsername.BorderStyle = BorderStyle.FixedSingle;
-        //     txtUsername.BackColor = Color.FromArgb(255, 250, 240);
-        // }
-
-        // private void txtUsername_Leave(object sender, EventArgs e)
-        // {
-        //     txtUsername.BackColor = Color.White;
-        // }
-
         private void txtPassword_Enter(object sender, EventArgs e)
         {
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
