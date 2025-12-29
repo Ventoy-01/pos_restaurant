@@ -78,12 +78,9 @@ public class CommandesController
     
     public List<CommandesModel> ListerCommandes()
     {
-        List<CommandesModel> commandes = new List<CommandesModel>();
         try
         {
-
-            commandes = commandesDao.Lister();
-            return commandes;
+            return commandesDao.Lister();
         }
         catch (Exception e)
         {

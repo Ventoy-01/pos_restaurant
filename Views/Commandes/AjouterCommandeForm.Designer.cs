@@ -114,7 +114,7 @@ partial class AjouterCommandeForm
         // comboMenu.Items.AddRange(new object[] { 1, 2 });
         foreach (var menu in menus)
         {
-            comboMenu.Items.AddRange($"{menu.Id} - {menu.Nom}");
+            comboMenu.Items.Add($"{menu.Id} - {menu.Nom}");
         }
         comboMenu.Location = new System.Drawing.Point(250, 90);
         comboMenu.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -137,7 +137,7 @@ partial class AjouterCommandeForm
         // comboClient.Items.AddRange(new object[] {1,7});
         foreach (var client in clients)
         {
-            comboClient.Items.AddRange($"{client.Id} - {client.Nom}");
+            comboClient.Items.Add($"{client.Id} - {client.Nom}");
         }
         
         comboClient.Location = new System.Drawing.Point(250, 190);

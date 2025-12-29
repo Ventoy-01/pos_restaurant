@@ -35,6 +35,7 @@ public partial class AfficherClientForm : Form
         if (string.IsNullOrWhiteSpace(critere))
         {
             ChargerClients();
+            lblNombreResultats.Text = "";
             return;
         }
         try

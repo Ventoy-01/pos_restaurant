@@ -47,12 +47,62 @@ public class PaiementsDao : IDao<PaiementsModel>
 
     public int Modifier(PaiementsModel e)
     {
-        throw new NotImplementedException();
-    }
+        try
+        {
+            conn = DbConnection.GetConnection();
+            conn.Open();
+            string sql =
+                "UPDATE paiements SET IdCommande=@IdCommande, Montant=@Montant,  ModePaiement=@ModePaiement WHERE Id=@Id ";
+            using ( cmd = new MySqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@IdCommande", e.IdCommande);
+                cmd.Parameters.AddWithValue("@Montant", e.Montant);
+                cmd.Parameters.AddWithValue("@ModePaiement", e.ModePaiement);
+                cmd.Parameters.AddWithValue("@Id", e.Id);
+
+                int result = cmd.ExecuteNonQuery();
+                return result;
+                
+            }
+            
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+            throw;
+        }    }
 
     public int Supprimer(string id)
     {
-        throw new NotImplementedException();
+        //pour supprimer un client
+        try
+        {
+            int  idValue = int.Parse(id);
+            conn = DbConnection.GetConnection();
+            conn.Open();
+            string req = "DELETE FROM paiements WHERE Id = @Id";
+            using ( cmd = new MySqlCommand(req, conn))
+            {
+                cmd.Parameters.AddWithValue("@Id", idValue);
+                int result = cmd.ExecuteNonQuery();
+                return result;
+            }
+
+        }
+        catch (MySqlException ex)
+        {
+            throw new Exception($"Erreur MySQL lors de la suppression: {ex.Message}", ex);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erreur lors de la suppression du client: {ex.Message}", ex);
+        }
+        finally
+        {
+            // Fermer la connexion
+            if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                conn.Close();
+        }
     }
 
     public PaiementsModel Rechercher(string id)
@@ -80,7 +130,7 @@ public class PaiementsDao : IDao<PaiementsModel>
                     {
                         Id = dr.GetInt32("Id"),
                         IdCommande = dr.GetInt32("IdCommande"),
-                        Montant = dr.GetInt32("Montant"),
+                        Montant = dr.GetDouble("Montant"),
                         DatePaiement = dr.GetDateTime("DatePaiement"),
                         ModePaiement = dr.GetString("ModePaiement"),
                     });

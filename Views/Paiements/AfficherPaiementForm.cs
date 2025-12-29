@@ -1,11 +1,12 @@
-﻿using System;
+﻿namespace Pos_Restaurant.Views.Paiements;
+
+using System;
 using System.Linq;
 using System.Windows.Forms;
 using Pos_Restaurant.Models;
 using Pos_Restaurant.Controllers;
 
-namespace Pos_Restaurant.Views.Paiements
-{
+
     public partial class AfficherPaiementForm : Form
     {
         private PaiementsController controller;
@@ -24,8 +25,6 @@ namespace Pos_Restaurant.Views.Paiements
                 var paiements = controller.ListerPaiement();
                 dgvPaiements.AutoGenerateColumns = false;
                 dgvPaiements.DataSource = paiements;
-        
-                lblNombreResultats.Text = $"{paiements.Count} paiement(s)";
                 
                 Console.WriteLine($"Il y a {paiements.Count} paiements");
             }
@@ -43,6 +42,7 @@ namespace Pos_Restaurant.Views.Paiements
             if (string.IsNullOrWhiteSpace(critere))
             {
                 ChargerPaiements();
+                lblNombreResultats.Text = "";
                 return;
             }
         
@@ -64,8 +64,8 @@ namespace Pos_Restaurant.Views.Paiements
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erreur lors de la recherche : {ex.Message}", "Erreur", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AfficherMessage($"Erreur lors de la recherche : {ex.Message}", "Erreur", 
+                     MessageBoxIcon.Error);
             }
         }
     
@@ -89,12 +89,31 @@ namespace Pos_Restaurant.Views.Paiements
             }
         }
 
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            //verifier si une ligne est selectionnée
+            if (dgvPaiements.CurrentRow != null)
+            {
+                PaiementsModel paiement = (PaiementsModel)dgvPaiements.SelectedRows[0].DataBoundItem;
+
+                using (ModifierPaiementForm formModif = new ModifierPaiementForm(paiement))
+                {
+                    formModif.Owner = this;
+                    formModif.ShowDialog();
+                    ChargerPaiements(); 
+                }
+            }
+            else
+            {
+                AfficherMessage("Veuillez sélectionner un client à modifier.", "Erreur", MessageBoxIcon.Error);
+            }
+        }
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
             if (dgvPaiements.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Veuillez sélectionner un paiement à supprimer.", 
-                    "Aucune sélection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                AfficherMessage("Veuillez sélectionner un paiement à supprimer.", 
+                    "Aucune sélection",  MessageBoxIcon.Warning);
                 return;
             }
         
@@ -120,43 +139,26 @@ namespace Pos_Restaurant.Views.Paiements
                     
                     if (success)
                     {
-                        MessageBox.Show("Paiement supprimé avec succès !", 
-                            "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AfficherMessage("Paiement supprimé avec succès !", 
+                            "Succès");
                         ChargerPaiements(); // Rafraîchir la grille
                     }
                     else
                     {
-                        MessageBox.Show("Échec de la suppression du paiement.", 
-                            "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        AfficherMessage("Échec de la suppression du paiement.", 
+                            "Erreur", MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erreur lors de la suppression : {ex.Message}", 
-                        "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AfficherMessage($"Erreur lors de la suppression : {ex.Message}", 
+                        "Erreur",  MessageBoxIcon.Error);
                 }
             }
         }
-
-        private void btnModifier_Click(object sender, EventArgs e)
+    
+        private void AfficherMessage(string message, string titre, MessageBoxIcon icone = MessageBoxIcon.Information)
         {
-            //verifier si une ligne est selectionnée
-            if (dgvPaiements.CurrentRow != null)
-            {
-                PaiementsModel paiement = (PaiementsModel)dgvPaiements.SelectedRows[0].DataBoundItem;
-
-                using (ModifierPaiementForm formModif = new ModifierPaiementForm(paiement))
-                {
-                    formModif.Owner = this;
-                    formModif.ShowDialog();
-                    ChargerPaiements(); 
-                }
-            }
-            else
-            {
-                MessageBox.Show("Veuillez sélectionner un client à modifier.");
-            }
+            MessageBox.Show(message, titre, MessageBoxButtons.OK, icone);
         }
-        
-    }
 }

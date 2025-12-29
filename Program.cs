@@ -1,5 +1,5 @@
 
-using Pos_Restaurant.Views.Commandes;
+using Pos_Restaurant.Views;
 using Pos_Restaurant.Views.Users;
 
 namespace Pos_Restaurant;
@@ -22,8 +22,10 @@ static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         // Application.Run(new Login());
-        Application.Run(new AfficherCommandeForm());
-        // Application.Run(new ());
+        // Application.Run(new AfficherPaiementForm());
+        // Application.Run(new AfficherUserForm());
+        // Application.Run(new ParametreForm());
+        Application.Run(new MainForm());
     }
 }
 

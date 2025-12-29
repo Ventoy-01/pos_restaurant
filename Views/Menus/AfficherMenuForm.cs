@@ -30,6 +30,7 @@ public partial class AfficherMenuForm : Form
         if (string.IsNullOrWhiteSpace(critere))
         {
             ChargerMenus();
+            lblNombreResultats.Text = "";
             return;
         }
 
@@ -38,6 +39,8 @@ public partial class AfficherMenuForm : Form
             var menus = controller.ListerMenus()
                 .Where(m => 
                     (m.Id.ToString() ?? "").Contains(critere) ||
+                    (m.PrixUnitaire.ToString() ?? "").Contains(critere) ||
+                    (m.Quantite.ToString() ?? "").Contains(critere) ||
                     (m.Nom ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase) ||
                     (m.Type ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase) ||
                     (m.Description ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase))

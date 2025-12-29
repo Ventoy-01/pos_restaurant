@@ -21,18 +21,8 @@ namespace Pos_Restaurant.Views.Menus
         {
             try
             {
-                // 1. Validation simple
-                if (string.IsNullOrWhiteSpace(txtNom.Text))
+                if (!ValiderSaisieMenu())
                 {
-                    AfficherMessage("Le nom est obligatoire", Color.Red);
-                    txtNom.Focus();
-                    return;
-                }
-                
-                if (!Double.TryParse(txtPrix.Text, out Double prix) || prix <= 0)
-                {
-                    AfficherMessage("Prix invalide (doit être > 0)", Color.Red);
-                    txtPrix.Focus();
                     return;
                 }
                 
@@ -41,7 +31,7 @@ namespace Pos_Restaurant.Views.Menus
                 {
                     Nom = txtNom.Text.Trim(),
                     Type = comboType.Text,
-                    PrixUnitaire = prix,
+                    PrixUnitaire = Convert.ToDouble(txtPrix.Text),
                     Quantite = (int)txtQuantite.Value,
                     Description = txtDescription.Text.Trim()
                 };
@@ -99,5 +89,42 @@ namespace Pos_Restaurant.Views.Menus
         {
             ViderFormulaire();
         }
+        private bool ValiderSaisieMenu()
+        {
+            // 1. Vérification du Nom (non vide)
+            if (string.IsNullOrWhiteSpace(txtNom.Text))
+            {
+                MessageBox.Show("Le nom du menu est obligatoire.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNom.Focus();
+                return false;
+            }
+
+            // 2. Vérification du Prix (doit être un nombre > 0)
+            if (!double.TryParse(txtPrix.Text, out double prix) || prix <= 0)
+            {
+                MessageBox.Show("Veuillez saisir un prix valide supérieur à 0.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPrix.Focus();
+                return false;
+            }
+
+            // 3. Vérification de la Quantité (NumericUpDown)
+            if (txtQuantite.Value <= 0)
+            {
+                MessageBox.Show("La quantité doit être supérieure à 0.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtQuantite.Focus();
+                return false;
+            }
+
+            // 4. Vérification de la Catégorie (ComboBox)
+            if (comboType.SelectedIndex == -1)
+            {
+                MessageBox.Show("Veuillez sélectionner un type de menu.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                comboType.Focus();
+                return false;
+            }
+
+            return true; 
+        }
+
     }
 }
