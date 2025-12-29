@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ing. Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj": {}
+    "C:\\Users\\Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ing. Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj": {
+    "C:\\Users\\Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ing. Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj",
+        "projectUniqueName": "C:\\Users\\Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj",
         "projectName": "Pos_Restaurant",
-        "projectPath": "C:\\Users\\Ing. Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj",
-        "packagesPath": "C:\\Users\\Ing. Jonas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ing. Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\obj\\",
+        "projectPath": "C:\\Users\\Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\Pos_Restaurant.csproj",
+        "packagesPath": "C:\\Users\\Jonas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jonas\\RiderProjects\\Projet_final_C#\\Pos_Restaurant\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ing. Jonas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Jonas\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0-windows"
@@ -68,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\Ing. Jonas\\.dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Users\\Jonas\\.dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
