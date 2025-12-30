@@ -65,7 +65,7 @@
             lblIdCommande.Name = "lblIdCommande";
             lblIdCommande.Size = new System.Drawing.Size(145, 28);
             lblIdCommande.TabIndex = 1;
-            lblIdCommande.Text = "ID Commande :";
+            lblIdCommande.Text = "Commande :";
             // 
             // comboIdCommande
             // 

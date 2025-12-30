@@ -285,7 +285,7 @@
             btnSauvegarderBD.Text = "💾 Sauvegarder base de données";
             btnSauvegarderBD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             btnSauvegarderBD.UseVisualStyleBackColor = false;
-            btnSauvegarderBD.Click += btnSauvegarderBD_Click;
+        
             // 
             // btnTestImprimante
             // 

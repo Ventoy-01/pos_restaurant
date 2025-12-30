@@ -145,4 +145,14 @@ using Pos_Restaurant.Models;
                 }
             }
         }
+        private void dgvUsers_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Vérifie si nous sommes sur la colonne Password
+            if (dgvUsers.Columns[e.ColumnIndex].Name == "colPassword" && e.Value != null)
+            {
+                e.Value = new string('●', 8);
+                e.FormattingApplied = true; 
+            }
+        }
+
     }

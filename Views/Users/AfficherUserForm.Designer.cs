@@ -55,6 +55,7 @@
             dgvUsers.Size = new System.Drawing.Size(920, 380);
             dgvUsers.TabIndex = 0;
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsers.CellFormatting += dgvUsers_CellFormatting;
             // 
             // colId
             // 
@@ -82,6 +83,7 @@
             colPassword.Name = "colPassword";
             colPassword.ReadOnly = true;
             colPassword.Width = 200;
+            
             // 
             // colRole
             // 

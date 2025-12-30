@@ -226,7 +226,7 @@ public class CommandesDao : IDao<CommandesModel>
                                 Quantite = dr.GetInt32("Quantite"),
                                 PrixTotal = dr.GetDouble("prixTotal"),
                                 Description = dr.GetString("description"),
-                                DateCommande = dr.GetDateTime("DateCommande") 
+                                DateCommande = dr.GetDateTime("DateCommande"),
                             });
                         }
                     
@@ -262,7 +262,7 @@ public class CommandesDao : IDao<CommandesModel>
                                m.nom AS NomMenu,
                                m.type AS Type,
                                m.prixUnitaire AS PrixUnitaire, 
-                               cl.nom AS NomClient
+                               CONCAT_WS(' ', cl.nom, cl.prenom) AS NomClient
                                FROM commandes c
                                INNER JOIN menus m ON c.idMenu = m.id
                                INNER JOIN clients cl ON c.idClient = cl.id
@@ -284,7 +284,7 @@ public class CommandesDao : IDao<CommandesModel>
                                 PrixTotal = Convert.ToDouble(dr["prixTotal"]),
                                 Description = dr["description"].ToString(),
 
-                                // Nouvelles
+                                // autres  champs 
                                 NomMenu = dr["NomMenu"].ToString(),
                                 Type = dr["Type"].ToString(),
                                 NomClient = dr["NomClient"].ToString(),

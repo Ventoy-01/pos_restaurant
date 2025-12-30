@@ -222,25 +222,6 @@ namespace Pos_Restaurant.Views
                           "Test d'impression", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnSauvegarderBD_Click(object sender, EventArgs e)
-        {
-            using (var dialog = new SaveFileDialog())
-            {
-                dialog.Filter = "Fichiers de sauvegarde (*.bak)|*.bak|Tous les fichiers (*.*)|*.*";
-                dialog.Title = "Sauvegarde de la base de données";
-                dialog.FileName = $"backup_{DateTime.Now:yyyyMMdd_HHmmss}.bak";
-                
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                   
-                    File.WriteAllText(dialog.FileName, "Sauvegarde simulée");
-                    
-                    MessageBox.Show($"💾 Sauvegarde créée avec succès !\n\n" +
-                                  $"Fichier : {Path.GetFileName(dialog.FileName)}\n" +
-                                  $"Emplacement : {Path.GetDirectoryName(dialog.FileName)}", 
-                                  "Sauvegarde réussie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
+
     }
 }

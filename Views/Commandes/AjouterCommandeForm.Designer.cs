@@ -21,10 +21,7 @@ partial class AjouterCommandeForm
     // Déclaration des contrôles
     private System.Windows.Forms.Label lblTitre;
     private System.Windows.Forms.Label lblMenu;
-    // private System.Windows.Forms.TextBox txtNom;
     private System.Windows.Forms.Label lblClient;
-    // private System.Windows.Forms.TextBox txtPrenom;
-    // private System.Windows.Forms.Label lblSexe;
     private System.Windows.Forms.ComboBox comboMenu;
     private System.Windows.Forms.ComboBox comboClient;
     
@@ -34,8 +31,6 @@ partial class AjouterCommandeForm
     private System.Windows.Forms.NumericUpDown txtPrixTotal;
     private System.Windows.Forms.Label lblDescription;
     private System.Windows.Forms.TextBox txtDescription;
-    // private System.Windows.Forms.Label lblMontantDette;
-    // private System.Windows.Forms.NumericUpDown txtMontantDette;
     private System.Windows.Forms.Button btnEnregistrer;
     private System.Windows.Forms.Button btnVider;
     private System.Windows.Forms.Label lblMessage;
@@ -61,10 +56,7 @@ partial class AjouterCommandeForm
         
         lblTitre = new System.Windows.Forms.Label();
         lblMenu = new System.Windows.Forms.Label();
-        // txtNom = new System.Windows.Forms.TextBox();
         lblClient = new System.Windows.Forms.Label();
-        // txtPrenom = new System.Windows.Forms.TextBox();
-        // lblSexe = new System.Windows.Forms.Label();
         comboMenu = new System.Windows.Forms.ComboBox();
         comboClient = new System.Windows.Forms.ComboBox();
         lblQuantite = new System.Windows.Forms.Label();
@@ -73,8 +65,6 @@ partial class AjouterCommandeForm
         txtPrixTotal = new System.Windows.Forms.NumericUpDown();
         lblDescription = new System.Windows.Forms.Label();
         txtDescription = new System.Windows.Forms.TextBox();
-        // lblMontantDette = new System.Windows.Forms.Label();
-        // txtMontantDette = new System.Windows.Forms.NumericUpDown();
         btnEnregistrer = new System.Windows.Forms.Button();
         btnVider = new System.Windows.Forms.Button();
         lblMessage = new System.Windows.Forms.Label();
@@ -102,15 +92,8 @@ partial class AjouterCommandeForm
         lblMenu.Size = new System.Drawing.Size(56, 25);
         lblMenu.TabIndex = 1;
         lblMenu.Text = "Menu :";
-        
-        
-        //comboMenus
+
         comboMenu.FormattingEnabled = true;
-        // comboMenu.Items.AddRange(new object[] { 1, 2 });
-        // foreach (var menu in menus)
-        // {
-        //     comboMenu.Items.Add($"{menu.Id} - {menu.Nom}");
-        // }
         comboMenu.Location = new System.Drawing.Point(250, 90);
         comboMenu.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
         comboMenu.Name = "comboMenu";
@@ -118,8 +101,8 @@ partial class AjouterCommandeForm
         comboMenu.TabIndex = 6;
         comboMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         // 
-      
-        
+        // lblClient
+        //
         lblClient.AutoSize = true;
         lblClient.Location = new System.Drawing.Point(50, 190);
         lblClient.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
@@ -130,16 +113,12 @@ partial class AjouterCommandeForm
         // 
         //comboClient
         comboClient.FormattingEnabled = true;
-        // comboClient.Items.AddRange(new object[] {1,7});        
         comboClient.Location = new System.Drawing.Point(250, 190);
         comboClient.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
         comboClient.Name = "comboClient";
         comboClient.Size = new System.Drawing.Size(414, 33);
         comboClient.TabIndex = 6;
         comboClient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-
-       
-        
         // 
         // lblQuantite
         // 
@@ -247,8 +226,6 @@ partial class AjouterCommandeForm
         Controls.Add(lblClient);
         Controls.Add(btnVider);
         Controls.Add(btnEnregistrer);
-        // Controls.Add(txtMontantDette);
-        // Controls.Add(lblMontantDette);
         Controls.Add(txtPrixTotal);
         Controls.Add(lblPrixTotal);
         Controls.Add(txtQuantite);
@@ -257,7 +234,6 @@ partial class AjouterCommandeForm
         Controls.Add(comboClient);
         Controls.Add(lblDescription);
         Controls.Add(txtDescription);
-        // Controls.Add(txtNom);
         Controls.Add(lblMenu);
         Controls.Add(lblTitre);
         

@@ -41,7 +41,7 @@ namespace Pos_Restaurant.Views.Paiements
             {
                 comboIdCommande.Items.Clear();
                 
-               List <CommandesModel> commandes = commandesController.ListerCommandes();
+               List <CommandesModel> commandes = commandesController.ListerCommandeMenuClient();
                List<PaiementsModel> paiements = controller.ListerPaiement();
                
                 // Récupérer les commandes non payées
@@ -53,7 +53,7 @@ namespace Pos_Restaurant.Views.Paiements
                
                foreach (var commande in commandesSansPaiement)
                {
-                   comboIdCommande.Items.Add($"{commande.Id} - {commande.IdClient} ");
+                   comboIdCommande.Items.Add($"{commande.Id} - {commande.NomClient} ");
                }
                 
                 if (comboIdCommande.Items.Count > 0)
