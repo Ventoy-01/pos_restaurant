@@ -9,7 +9,11 @@ public class CommandesModel
     private Double prixTotal;
     private String description;
 
-			
+    public string NomMenu { get; set; }
+    public DateTime DateCommande { get; set; }
+    public string Type { get; set; }
+    public string NomClient { get; set; }
+    public Double PrixUnitaire { get; set; } 
     public CommandesModel()
     {
     }

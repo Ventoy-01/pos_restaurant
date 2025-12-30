@@ -109,8 +109,7 @@ namespace Pos_Restaurant.Views.Paiements
                     AfficherMessage($"Paiement Trop eleve, Montant Total {ExtrairePrixTotalCommande()}", "Erreur", MessageBoxIcon.Error);
                     return;
                 }
-              
-        
+                
                 // Appeler le contrôleur
                 bool succes = controller.AjouterPaiement(paiement);
         

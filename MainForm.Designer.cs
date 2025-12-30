@@ -88,7 +88,7 @@ namespace Pos_Restaurant
             panelUserInfo.Padding = new System.Windows.Forms.Padding(10);
             panelUserInfo.Size = new System.Drawing.Size(250, 80);
             panelUserInfo.TabIndex = 9;
-            panelUserInfo.Click += new System.EventHandler(panelUserInfo_Click);
+            // panelUserInfo.Click += new System.EventHandler(panelUserInfo_Click);
             // 
             // lblUserIcon
             // 
@@ -382,12 +382,10 @@ namespace Pos_Restaurant
             Controls.Add(panelHeader);
             Controls.Add(panelSidebar);
             Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             MinimumSize = new System.Drawing.Size(1400, 800);
             Name = "MainForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "POS Restaurant - Dashboard";
-            // this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             panelSidebar.ResumeLayout(false);
             panelUserInfo.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
