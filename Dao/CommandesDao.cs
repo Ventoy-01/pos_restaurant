@@ -70,16 +70,37 @@ public class CommandesDao : IDao<CommandesModel>
     }
 
 
-//Modifier Commande
-        public int Modifier(CommandesModel c)
+    //Modifier Commande
+    public int Modifier(CommandesModel c)
+    {
+        try
         {
-            try
-            {
-                conn = DbConnection.GetConnection();
-                
-                if (conn.State != System.Data.ConnectionState.Open)
-                    conn.Open();
-                
+            conn = DbConnection.GetConnection();
+            conn.Open();
+           
+                // 1. Récupérer l'ancienne quantité avant de modifier
+                int ancienneQuantite = 0;
+                string selectReq = "SELECT quantite FROM commandes WHERE id = @id";
+                using (var selectCmd = new MySqlCommand(selectReq, conn))
+                {
+                    selectCmd.Parameters.AddWithValue("@id", c.Id);
+                    object result = selectCmd.ExecuteScalar();
+                    if (result != null)
+                        ancienneQuantite = Convert.ToInt32(result);
+                }
+
+                int difference = c.Quantite - ancienneQuantite;
+
+                // 3. Mettre à jour le stock dans la table menus
+                string updateStockReq = "UPDATE menus SET Quantite = Quantite - @diff WHERE id = @idMenu";
+                using (var stockCmd = new MySqlCommand(updateStockReq, conn, transaction))
+                {
+                    stockCmd.Parameters.AddWithValue("@diff", difference);
+                    stockCmd.Parameters.AddWithValue("@idMenu", c.IdMenu);
+                    stockCmd.ExecuteNonQuery();
+                }
+
+                // 4. Mettre à jour la commande
                 string req = @"UPDATE commandes 
                               SET idMenu = @idMenu, 
                                   idClient = @idClient, 
@@ -87,94 +108,92 @@ public class CommandesDao : IDao<CommandesModel>
                                   prixTotal = @prix, 
                                   description = @desc
                               WHERE id = @id";
-                
-                using (cmd = new MySqlCommand(req, conn))
+
+                int rowsAffected = 0;
+                using (var cmd = new MySqlCommand(req, conn, transaction))
                 {
                     cmd.Parameters.AddWithValue("@idMenu", c.IdMenu);
                     cmd.Parameters.AddWithValue("@idClient", c.IdClient);
                     cmd.Parameters.AddWithValue("@qte", c.Quantite);
                     cmd.Parameters.AddWithValue("@prix", c.PrixTotal);
-                    cmd.Parameters.AddWithValue("@desc", c.Description );
+                    cmd.Parameters.AddWithValue("@desc", c.Description);
                     cmd.Parameters.AddWithValue("@id", c.Id);
-                    
-                    
-                    return cmd.ExecuteNonQuery();
+                    rowsAffected = cmd.ExecuteNonQuery();
                 }
-            }
-            catch (MySqlException ex)
-            {
-                throw new Exception($"Erreur MySQL lors de la modification: {ex.Message}", ex);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erreur lors de la modification de la commande: {ex.Message}", ex);
-            }
-            finally
-            {
-                if (conn != null && conn.State == System.Data.ConnectionState.Open)
-                    conn.Close();
-            }
+
+                return rowsAffected;
+        
         }
+        catch (MySqlException ex)
+        {
+            throw new Exception($"Erreur MySQL : {ex.Message}");
+        }
+        finally
+        {
+            if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                conn.Close();
+        }
+    }
 
         //Supprimer Commande
-        public int Supprimer(String val)
+    public int Supprimer(String val)
+    {
+        int id = int.Parse(val);
+        int result = 0;
+
+        try
         {
-            int id = int.Parse(val);
-            int result = 0;
+            conn = DbConnection.GetConnection();
+            if (conn.State != System.Data.ConnectionState.Open)
+                conn.Open();
 
-            try
+            int idMenu = 0;
+            int quantiteARendre = 0;
+
+            string selectReq = "SELECT IdMenu, Quantite FROM commandes WHERE id = @id";
+            using (MySqlCommand selectCmd = new MySqlCommand(selectReq, conn))
             {
-                conn = DbConnection.GetConnection();
-                if (conn.State != System.Data.ConnectionState.Open)
-                    conn.Open();
-
-                int idMenu = 0;
-                int quantiteARendre = 0;
-
-                string selectReq = "SELECT IdMenu, Quantite FROM commandes WHERE id = @id";
-                using (MySqlCommand selectCmd = new MySqlCommand(selectReq, conn))
+                selectCmd.Parameters.AddWithValue("@id", id);
+                using (MySqlDataReader dr = selectCmd.ExecuteReader())
                 {
-                    selectCmd.Parameters.AddWithValue("@id", id);
-                    using (MySqlDataReader dr = selectCmd.ExecuteReader())
+                    if (dr.Read())
                     {
-                        if (dr.Read())
-                        {
-                            idMenu = dr.GetInt32("IdMenu"); 
-                            quantiteARendre = dr.GetInt32("Quantite");
-                        }
-                    } 
-                }
-
-                if (idMenu == 0) return 0;
-
-                string deleteReq = "DELETE FROM commandes WHERE id = @id";
-                using (MySqlCommand deleteCmd = new MySqlCommand(deleteReq, conn))
-                {
-                    deleteCmd.Parameters.AddWithValue("@id", id);
-                    result = deleteCmd.ExecuteNonQuery();
-                }
-
-                string updateReq = "UPDATE menus SET Quantite = Quantite + @quantite WHERE id = @IdMenu";
-                using (MySqlCommand updateCmd = new MySqlCommand(updateReq, conn))
-                {
-                    updateCmd.Parameters.AddWithValue("@quantite", quantiteARendre);
-                    updateCmd.Parameters.AddWithValue("@IdMenu", idMenu);
-                    updateCmd.ExecuteNonQuery();
-                }
-
-                return result;
+                        idMenu = dr.GetInt32("IdMenu"); 
+                        quantiteARendre = dr.GetInt32("Quantite");
+                    }
+                } 
             }
-            catch (MySqlException ex)
+
+            if (idMenu == 0) return 0;
+
+            string deleteReq = "DELETE FROM commandes WHERE id = @id";
+            using (MySqlCommand deleteCmd = new MySqlCommand(deleteReq, conn))
             {
-                throw new Exception($"Erreur MySQL lors de la suppression : {ex.Message}");
+                deleteCmd.Parameters.AddWithValue("@id", id);
+                result = deleteCmd.ExecuteNonQuery();
             }
-            finally
+
+            string updateReq = "UPDATE menus SET Quantite = Quantite + @quantite WHERE id = @IdMenu";
+            using (MySqlCommand updateCmd = new MySqlCommand(updateReq, conn))
             {
-                if (conn != null && conn.State == System.Data.ConnectionState.Open)
-                    conn.Close();
+                updateCmd.Parameters.AddWithValue("@quantite", quantiteARendre);
+                updateCmd.Parameters.AddWithValue("@IdMenu", idMenu);
+                updateCmd.ExecuteNonQuery();
             }
+
+            return result;
         }
- 
+        catch (MySqlException ex)
+        {
+            throw new Exception($"Erreur MySQL lors de la suppression : {ex.Message}");
+        }
+        finally
+        {
+            if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                conn.Close();
+        }
+    }
+
         //Rechercher Commande
         public CommandesModel Rechercher(string val)
         {

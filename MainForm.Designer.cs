@@ -107,7 +107,7 @@ namespace Pos_Restaurant
             lblUserName.ForeColor = System.Drawing.Color.White;
             lblUserName.Location = new System.Drawing.Point(70, 15);
             lblUserName.Name = "lblUserName";
-            lblUserName.Size = new System.Drawing.Size(170, 25);
+            lblUserName.Size = new System.Drawing.Size(170, 30);
             lblUserName.TabIndex = 0;
             lblUserName.Text = "Utilisateur";
             lblUserName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

@@ -175,6 +175,7 @@ namespace Pos_Restaurant
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
+            lblTitle.Text = "🛠 PARAMÈTRES UTILISATEURS";
             ActiverBouton((Button)sender);
             OuvrirFormDansPanel(new ParametreForm());
         }
