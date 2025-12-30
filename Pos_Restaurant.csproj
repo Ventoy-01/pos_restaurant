@@ -54,6 +54,9 @@
       <Compile Update="Views\Parametres\ParametreForm.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Views\DashboardForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
 	
 	<ItemGroup>

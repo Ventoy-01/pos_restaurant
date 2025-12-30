@@ -1,14 +1,14 @@
-
-using Pos_Restaurant.Views;
-using Pos_Restaurant.Views.Users;
-
 namespace Pos_Restaurant;
 
+
+using System;
+using System.Windows.Forms;
 using Pos_Restaurant.Views.Paiements;
 using Pos_Restaurant.Models;
 using Pos_Restaurant.Dao;
 using Pos_Restaurant.Views.Menus;
 using Pos_Restaurant.Views.Clients;
+using Pos_Restaurant.Views.Users;
 static class Program
 {
     /// <summary>

@@ -232,8 +232,7 @@ namespace Pos_Restaurant.Views
                 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Ici, vous ajouteriez le code pour sauvegarder la base de données
-                    // Pour l'exemple, on simule une sauvegarde
+                   
                     File.WriteAllText(dialog.FileName, "Sauvegarde simulée");
                     
                     MessageBox.Show($"💾 Sauvegarde créée avec succès !\n\n" +

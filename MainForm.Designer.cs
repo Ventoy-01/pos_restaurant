@@ -382,7 +382,7 @@ namespace Pos_Restaurant
             Controls.Add(panelHeader);
             Controls.Add(panelSidebar);
             Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            MinimumSize = new System.Drawing.Size(1400, 800);
+            MinimumSize = new System.Drawing.Size(1400, 600);
             Name = "MainForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "POS Restaurant - Dashboard";

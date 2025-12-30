@@ -14,6 +14,10 @@ using Pos_Restaurant.Models;
         {
             InitializeComponent();
             controller = new UsersController();
+            
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
         }
 
         // Choisissez une icône : 👤, 🔐, 🏪, 🍽️, etc.

@@ -116,32 +116,57 @@ public class CommandesDao : IDao<CommandesModel>
             }
         }
 
-//Supprimer Commande
+        //Supprimer Commande
         public int Supprimer(String val)
         {
             int id = int.Parse(val);
+            int result = 0;
+
             try
             {
                 conn = DbConnection.GetConnection();
-                
                 if (conn.State != System.Data.ConnectionState.Open)
                     conn.Open();
-                
-                string req = @"DELETE from commandes  WHERE id = @id";
-                
-                using (cmd = new MySqlCommand(req, conn))
+
+                int idMenu = 0;
+                int quantiteARendre = 0;
+
+                string selectReq = "SELECT IdMenu, Quantite FROM commandes WHERE id = @id";
+                using (MySqlCommand selectCmd = new MySqlCommand(selectReq, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    return cmd.ExecuteNonQuery();
+                    selectCmd.Parameters.AddWithValue("@id", id);
+                    using (MySqlDataReader dr = selectCmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            idMenu = dr.GetInt32("IdMenu"); 
+                            quantiteARendre = dr.GetInt32("Quantite");
+                        }
+                    } 
                 }
+
+                if (idMenu == 0) return 0;
+
+                string deleteReq = "DELETE FROM commandes WHERE id = @id";
+                using (MySqlCommand deleteCmd = new MySqlCommand(deleteReq, conn))
+                {
+                    deleteCmd.Parameters.AddWithValue("@id", id);
+                    result = deleteCmd.ExecuteNonQuery();
+                }
+
+                string updateReq = "UPDATE menus SET Quantite = Quantite + @quantite WHERE id = @IdMenu";
+                using (MySqlCommand updateCmd = new MySqlCommand(updateReq, conn))
+                {
+                    updateCmd.Parameters.AddWithValue("@quantite", quantiteARendre);
+                    updateCmd.Parameters.AddWithValue("@IdMenu", idMenu);
+                    updateCmd.ExecuteNonQuery();
+                }
+
+                return result;
             }
             catch (MySqlException ex)
             {
-                throw new Exception($"Erreur MySQL lors de la suppression: {ex.Message}", ex);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erreur lors de la suppression de la commande: {ex.Message}", ex);
+                throw new Exception($"Erreur MySQL lors de la suppression : {ex.Message}");
             }
             finally
             {
@@ -149,8 +174,7 @@ public class CommandesDao : IDao<CommandesModel>
                     conn.Close();
             }
         }
-
-        
+ 
         //Rechercher Commande
         public CommandesModel Rechercher(string val)
         {
