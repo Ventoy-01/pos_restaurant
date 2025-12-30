@@ -41,6 +41,7 @@
             comboModePaiement = new System.Windows.Forms.ComboBox();
             btnEnregistrer = new System.Windows.Forms.Button();
             btnAnnuler = new System.Windows.Forms.Button();
+            lblStatutPrix = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // lblTitre
@@ -66,6 +67,13 @@
             lblIdPaiement.Size = new System.Drawing.Size(37, 28);
             lblIdPaiement.TabIndex = 1;
             lblIdPaiement.Text = "ID:";
+            
+            // lblStatutPrix
+            lblStatutPrix.AutoSize = true;
+            lblStatutPrix.Location = new System.Drawing.Point(380, 175);
+            lblStatutPrix.Name = "lblStatutPrix";
+            lblStatutPrix.Size = new System.Drawing.Size(0, 13);
+
             // 
             // lblIdCommande
             // 
@@ -110,6 +118,7 @@
             txtMontant.TabIndex = 2;
             txtMontant.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             txtMontant.KeyPress += txtMontant_KeyPress;
+            txtMontant.TextChanged += txtMontant_TextChanged;
             // 
             // lblMontantHTG
             // 
@@ -226,6 +235,7 @@
 
         #endregion
 
+        private System.Windows.Forms.Label lblStatutPrix;
         private System.Windows.Forms.Label lblTitre;
         private System.Windows.Forms.Label lblIdPaiement;
         private System.Windows.Forms.Label lblIdCommande;

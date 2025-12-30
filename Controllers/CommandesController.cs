@@ -22,16 +22,6 @@ public class CommandesController
                 throw new ArgumentNullException(nameof(commande), "La Commande ne peut pas être null");
             }
                 
-            // if (string.IsNullOrWhiteSpace(commande.Nom))
-            // {
-            //     throw new ArgumentException("Le nom du menu est obligatoire");
-            // }
-                
-            // if (commande.PrixUnitaire <= 0)
-            // {
-            //     throw new ArgumentException("Le prix unitaire doit être positif");
-            // }
-                
             // Appel au DAO
             int result = commandesDao.Enregistrer(commande);
                 
@@ -81,6 +71,18 @@ public class CommandesController
         try
         {
             return commandesDao.Lister();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }  
+    public List<CommandesModel> ListerCommandeMenuClient()
+    {
+        try
+        {
+            return commandesDao.ListerCommandeMenuClient();
         }
         catch (Exception e)
         {

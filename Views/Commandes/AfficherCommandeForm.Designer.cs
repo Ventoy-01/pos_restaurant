@@ -111,7 +111,7 @@ namespace Pos_Restaurant.Views.Commandes
             // 
             // txtPrix
             // 
-            txtPrix.DataPropertyName = "Prix";
+            txtPrix.DataPropertyName = "PrixUnitaire";
             txtPrix.HeaderText = "Prix (HTG)";
             txtPrix.MinimumWidth = 8;
             txtPrix.Name = "txtPrix";
@@ -124,6 +124,8 @@ namespace Pos_Restaurant.Views.Commandes
             txtQuantite.MinimumWidth = 8;
             txtQuantite.Name = "txtQuantite";
             txtQuantite.ReadOnly = true;
+            
+            // txtQuantite.Maximum = 10000;
             // 
             // txtPrixTotal
             // 
@@ -227,8 +229,10 @@ namespace Pos_Restaurant.Views.Commandes
             ((System.ComponentModel.ISupportInitialize)dgvCommandes).EndInit();
             ResumeLayout(false);
             PerformLayout();
+            
+            
         }
-
+        
         #endregion
 
         private System.Windows.Forms.DataGridView dgvCommandes;
@@ -248,5 +252,6 @@ namespace Pos_Restaurant.Views.Commandes
         private System.Windows.Forms.DataGridViewTextBoxColumn txtQuantite;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtPrixTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDescription;
+        
     }
 }

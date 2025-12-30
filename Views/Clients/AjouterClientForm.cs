@@ -102,7 +102,7 @@ public partial class AjouterClientForm : Form
         }
 
         // 2. Validation du téléphone (format standard : au moins 8 chiffres)
-        if (!System.Text.RegularExpressions.Regex.IsMatch(txtTelephone.Text.Substring(5), @"^[3-5][0-9]{7}$"))
+        if (!System.Text.RegularExpressions.Regex.IsMatch(txtTelephone.Text, @"^[3-5][0-9]{7}$"))
         {
             MessageBox.Show("Le numéro est invalide (8 chiffres attendus comm par 3, 4 ou 5).", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return false;

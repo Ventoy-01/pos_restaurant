@@ -12,6 +12,7 @@ public class CommandesDao : IDao<CommandesModel>
     private MySqlConnection conn = null;
     private MySqlCommand cmd = null;
     private MySqlDataReader dr = null;
+    private MySqlTransaction transaction = null;
 
 
     //Ajouter une commande
@@ -22,9 +23,7 @@ public class CommandesDao : IDao<CommandesModel>
         {
             // Établir la connexion
             conn = DbConnection.GetConnection();
-
             // Ouvrir la connexion
-
             conn.Open();
 
             string req = @"INSERT INTO commandes (IdMenu, IdClient, Quantite, PrixTotal, description) 
@@ -42,7 +41,16 @@ public class CommandesDao : IDao<CommandesModel>
 
                 // Exécuter la commande
                 int result = cmd.ExecuteNonQuery();
-
+                // return result;
+                string sqlUpdateStock = "UPDATE menus SET Quantite = quantite - @qte WHERE id = @idM";
+                using (var cmdUpdate = new MySqlCommand(sqlUpdateStock, conn))
+                {
+                    cmdUpdate.Parameters.AddWithValue("@qte", c.Quantite);
+                    cmdUpdate.Parameters.AddWithValue("@idM", c.IdMenu);
+                    cmdUpdate.ExecuteNonQuery();
+                }
+                
+                
                 return result;
             }
         }
@@ -52,7 +60,7 @@ public class CommandesDao : IDao<CommandesModel>
         }
         catch (Exception ex)
         {
-            throw new Exception($"Erreur lors de l'ajout du clien: {ex.Message}", ex);
+            throw new Exception($"Erreur lors de l'ajout de la commande: {ex.Message}", ex);
         }
         finally
         {
@@ -76,17 +84,17 @@ public class CommandesDao : IDao<CommandesModel>
                               SET idMenu = @idMenu, 
                                   idClient = @idClient, 
                                   quantite = @qte, 
-                                  prixTotal = @prixToal, 
+                                  prixTotal = @prix, 
                                   description = @desc
                               WHERE id = @id";
                 
                 using (cmd = new MySqlCommand(req, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", c.IdMenu);
+                    cmd.Parameters.AddWithValue("@idMenu", c.IdMenu);
                     cmd.Parameters.AddWithValue("@idClient", c.IdClient);
                     cmd.Parameters.AddWithValue("@qte", c.Quantite);
                     cmd.Parameters.AddWithValue("@prix", c.PrixTotal);
-                    cmd.Parameters.AddWithValue("@desc", c.Description ?? "");
+                    cmd.Parameters.AddWithValue("@desc", c.Description );
                     cmd.Parameters.AddWithValue("@id", c.Id);
                     
                     
@@ -99,7 +107,7 @@ public class CommandesDao : IDao<CommandesModel>
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erreur lors de la modification du menu: {ex.Message}", ex);
+                throw new Exception($"Erreur lors de la modification de la commande: {ex.Message}", ex);
             }
             finally
             {
@@ -174,7 +182,8 @@ public class CommandesDao : IDao<CommandesModel>
                                 IdClient = dr.GetInt32("IdClient"),
                                 Quantite = dr.GetInt32("Quantite"),
                                 PrixTotal = dr.GetDouble("prixTotal"),
-                                Description = dr.GetString("description")
+                                Description = dr.GetString("description"),
+                                DateCommande = dr.GetDateTime("DateCommande") 
                             });
                         }
                     
@@ -198,52 +207,67 @@ public class CommandesDao : IDao<CommandesModel>
                     conn.Close();
             }  
         }
-    
-        // public ArrayList ListerCommandeMenuClient()
-        // {
-        //     List<CommandesModel> commandes = new List<CommandesModel>();
-        //     try
-        //     {
-        //         conn = DbConnection.GetConnection();
-        //         conn.Open();
-        //         string req = @"SELECT * FROM commandes";
-        //         
-        //         
-        //         using (cmd = new MySqlCommand(req, conn))
-        //         {
-        //             dr = cmd.ExecuteReader();
-        //             
-        //             while (dr.Read())
-        //             {
-        //                 commandes.Add(new CommandesModel()
-        //                 {
-        //                     Id = dr.GetInt32("id"),
-        //                     IdMenu = dr.GetInt32("IdMenu"),
-        //                     IdClient = dr.GetInt32("IdClient"),
-        //                     Quantite = dr.GetInt32("Quantite"),
-        //                     PrixTotal = dr.GetDouble("prixTotal"),
-        //                     Description = dr.GetString("description")
-        //                 });
-        //             }
-        //             
-        //             return commandes;
-        //         }
-        //     }
-        //     catch (MySqlException ex)
-        //     {
-        //         throw new Exception($"Erreur MySQL lors du listage: {ex.Message}", ex);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         throw new Exception($"Erreur lors du listage des menus: {ex.Message}", ex);
-        //     }
-        //     finally
-        //     {
-        //         if (dr != null && !dr.IsClosed)
-        //             dr.Close();
-        //         
-        //         if (conn != null && conn.State == System.Data.ConnectionState.Open)
-        //             conn.Close();
-        //     }  
-        // }
+
+        public List<CommandesModel> ListerCommandeMenuClient()
+        {
+            List<CommandesModel> commandes = new List<CommandesModel>();
+            try
+            {
+                conn = DbConnection.GetConnection();
+                conn.Open();
+                string req = @"SELECT c.*, 
+                               m.nom AS NomMenu,
+                               m.type AS Type,
+                               m.prixUnitaire AS PrixUnitaire, 
+                               cl.nom AS NomClient
+                               FROM commandes c
+                               INNER JOIN menus m ON c.idMenu = m.id
+                               INNER JOIN clients cl ON c.idClient = cl.id
+                               ORDER BY c.id DESC";
+
+
+                using (cmd = new MySqlCommand(req, conn))
+                {
+                    using (dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            commandes.Add(new CommandesModel
+                            {
+                                Id = Convert.ToInt32(dr["id"]),
+                                IdMenu = Convert.ToInt32(dr["idMenu"]),
+                                IdClient = Convert.ToInt32(dr["idClient"]),
+                                Quantite = Convert.ToInt32(dr["quantite"]),
+                                PrixTotal = Convert.ToDouble(dr["prixTotal"]),
+                                Description = dr["description"].ToString(),
+
+                                // Nouvelles
+                                NomMenu = dr["NomMenu"].ToString(),
+                                Type = dr["Type"].ToString(),
+                                NomClient = dr["NomClient"].ToString(),
+                                PrixUnitaire = Convert.ToDouble(dr["PrixUnitaire"])
+                            });
+                        }
+                    }
+                }
+
+                return commandes;
+            }
+            catch (MySqlException ex)
+            {
+                throw new Exception($"Erreur MySQL lors du listage: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erreur lors du listage des menus: {ex.Message}", ex);
+            }
+            finally
+            {
+                if (dr != null && !dr.IsClosed)
+                    dr.Close();
+
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                    conn.Close();
+            }
+        }
 }

@@ -9,11 +9,13 @@ namespace Pos_Restaurant.Views.Paiements
     {
         private PaiementsModel paiementCourant;
         private PaiementsController controller;
+        private CommandesController commandesController ;
         
         public ModifierPaiementForm(PaiementsModel paiement)
         {
             InitializeComponent();
             controller = new PaiementsController();
+            commandesController = new CommandesController();
             paiementCourant = paiement;
             ChargerPaiementDansFormulaire();
         }
@@ -51,6 +53,16 @@ namespace Pos_Restaurant.Views.Paiements
                 paiementCourant.DatePaiement = dtpDatePaiement.Value;
                 paiementCourant.ModePaiement = comboModePaiement.Text;
                 
+                if (paiementCourant.Montant < ExtrairePrixTotalCommande())
+                {
+                    AfficherMessage($"Paiement insuffisance, Montant Total {ExtrairePrixTotalCommande()}", "Erreur", MessageBoxIcon.Error);
+                    return;
+                }
+                if (paiementCourant.Montant > ExtrairePrixTotalCommande())
+                {
+                    AfficherMessage($"Paiement Trop eleve, Montant Total {ExtrairePrixTotalCommande()}", "Erreur", MessageBoxIcon.Error);
+                    return;
+                }
 
 
                 // Appel contrôleur
@@ -147,6 +159,47 @@ namespace Pos_Restaurant.Views.Paiements
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+        
+        private Double ExtrairePrixTotalCommande()
+        {
+            List<CommandesModel> commandes = commandesController.ListerCommandes();
+            int idCommande = txtIdCommande.Text != "" ? Convert.ToInt32( txtIdCommande.Text) : 0;
+
+            return commandes.FirstOrDefault(c => c.Id == idCommande)?.PrixTotal ?? 0.0;
+        }
+        private void txtMontant_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse(txtMontant.Text, out double montantSaisi))
+            {
+                double prixTotalAPayer = ExtrairePrixTotalCommande();
+
+                if (montantSaisi <= 0)
+                {
+                    lblStatutPrix.Text = "Veuillez saisir un montant";
+                    lblStatutPrix.ForeColor = Color.Orange;
+                }
+                else if (montantSaisi < prixTotalAPayer)
+                {
+                    lblStatutPrix.Text = "Montant insuffisant (Reste : " + (prixTotalAPayer - montantSaisi).ToString("N2") + ")";
+                    lblStatutPrix.ForeColor = Color.Red;
+                }
+                else if (montantSaisi > prixTotalAPayer)
+                {
+                    lblStatutPrix.Text = "Montant trop élevé (Trop-perçu : " + (montantSaisi - prixTotalAPayer).ToString("N2") + ")";
+                    lblStatutPrix.ForeColor = Color.Red;
+                }
+                else 
+                {
+                    lblStatutPrix.Text = "Montant exact - Prêt à valider";
+                    lblStatutPrix.ForeColor = Color.Green;
+                }
+            }
+            else
+            {
+                lblStatutPrix.Text = "Saisie invalide";
+                lblStatutPrix.ForeColor = Color.Red;
             }
         }
         

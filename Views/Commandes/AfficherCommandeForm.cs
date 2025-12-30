@@ -32,35 +32,38 @@ public partial class AfficherCommandeForm : Form
     private void ChargerCommandes()
     {
         dgvCommandes.AutoGenerateColumns = false;
-        dgvCommandes.DataSource = controller.ListerCommandes();
+        dgvCommandes.DataSource = controller.ListerCommandeMenuClient();
         
-        Console.WriteLine($"il y a {controller.ListerCommandes().Count} commandes");
+        Console.WriteLine($"il y a {controller.ListerCommandeMenuClient().Count} commandes");
     }
+ 
     
     private void txtRechercher_TextChanged(object sender, EventArgs e)
     {
         string critere = txtRechercher.Text.Trim();
-    
+
         if (string.IsNullOrWhiteSpace(critere))
         {
             ChargerCommandes();
             lblNombreResultats.Text = "";
             return;
         }
-    
+
         try
         {
-            var commandes = controller.ListerCommandes()
+            var commandes = controller.ListerCommandeMenuClient()
                 .Where(c => 
                     (c.Id.ToString() ?? "").Contains(critere) ||
                     (c.IdMenu.ToString() ?? "").Contains(critere) ||
                     (c.IdClient.ToString() ?? "").Contains(critere) ||
+                    (c.NomMenu ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase) ||
+                    (c.Type ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase) ||
+                    (c.NomClient ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase) ||
                     (c.Description ?? "").Contains(critere, StringComparison.OrdinalIgnoreCase))
                 .ToList();
-            
+        
             dgvCommandes.DataSource = commandes;
-            lblNombreResultats.Text = $"{commandes.Count} menu(s) trouvé(s)";
-
+            lblNombreResultats.Text = $"{commandes.Count} commande(s) trouvée(s)";
         }
         catch (Exception ex)
         {
@@ -73,6 +76,7 @@ public partial class AfficherCommandeForm : Form
     {
         if (dgvCommandes.CurrentRow != null)
         {
+            
             CommandesModel commande = (CommandesModel)dgvCommandes.SelectedRows[0].DataBoundItem;
 
             using (ModifierCommandeForm formModif = new ModifierCommandeForm(commande))
@@ -94,8 +98,6 @@ public partial class AfficherCommandeForm : Form
         {
             // 1. Récupérer l'ID 
             int commandeId = Convert.ToInt32(dgvCommandes.CurrentRow.Cells["txtId"].Value);
-            // string nomMenu = dgvCommandes.CurrentRow.Cells["comboMenu"].Value?.ToString() ?? "ce client";
-            // string nomClient = dgvCommandes.CurrentRow.Cells["comboClient"].Value?.ToString() ?? "";
     
             // 2. Demander confirmation
             DialogResult dialogResult = MessageBox.Show(
